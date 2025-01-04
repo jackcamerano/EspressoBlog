@@ -7,6 +7,7 @@ function slugify(slug: string) {
 
 // Home Page
 export function GetAllPosts() {
+    console.log(allPosts[1])
     return allPosts
 }
 
@@ -19,7 +20,7 @@ export function RelatedPosts(tag: string, dontInclude: string) {
     const RelatedPosts: Post[] = []
 
     allPosts.map(post => {
-        if (post.tags !== undefined) {
+        if (post.tags) {
             post.tags.filter(item => {
                 if (slugify(item) === slugify(tag)) {
                     if (dontInclude !== post.slug) {
@@ -31,12 +32,53 @@ export function RelatedPosts(tag: string, dontInclude: string) {
     })
     return RelatedPosts
 }
+
+// Category Page
+export async function GetCategoryPost(slug: string) {
+    const CategoryPosts: Post[] = []
+
+    allPosts.map(post => {
+        if (post.category) {
+            post.category.filter(category => {
+                if (
+                    category.toLowerCase().trim().split(' ').join('-') === slug
+                ) {
+                    CategoryPosts.push(post)
+                }
+            })
+        }
+    })
+
+    return CategoryPosts
+}
+
+// Category Page
+export async function GetCategories() {
+    const CategoryList: { slug: string }[] = []
+
+    allPosts.map(post => {
+        if (post.category) {
+            post.category.filter(tag => {
+                const formatCategory = tag
+                    .toLowerCase()
+                    .trim()
+                    .split(' ')
+                    .join('-')
+                if (formatCategory) {
+                    CategoryList.push({ slug: formatCategory })
+                }
+            })
+        }
+    })
+    return CategoryList
+}
+
 // Tag Page
 export async function GetTagsPost(slug: string) {
     const TagPosts: Post[] = []
 
     allPosts.map(post => {
-        if (post.tags !== undefined) {
+        if (post.tags) {
             post.tags.filter(tag => {
                 if (tag.toLowerCase().trim().split(' ').join('-') === slug) {
                     TagPosts.push(post)
@@ -47,6 +89,7 @@ export async function GetTagsPost(slug: string) {
 
     return TagPosts
 }
+
 // Tag Page
 export async function GetTags() {
     const TagsList: { slug: string }[] = []
@@ -54,7 +97,7 @@ export async function GetTags() {
     allPosts.map(post => {
         if (post.tags !== undefined) {
             post.tags.filter(tag => {
-                let formatTag = tag.toLowerCase().trim().split(' ').join('-')
+                const formatTag = tag.toLowerCase().trim().split(' ').join('-')
                 if (formatTag) {
                     TagsList.push({ slug: formatTag })
                 }
