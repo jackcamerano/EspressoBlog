@@ -27,7 +27,7 @@ export function BlogCard({ item }: { item: Post }) {
                         </span>
                     </div>
                     <CardTitle className="text-2xl font-bold leading-tight lg:text-3xl">
-                        {item.title}
+                        <Link href={`/read/${slug}`}>{item.title}</Link>
                     </CardTitle>
                     <CardDescription className="text-md font-medium text-card-foreground/90 lg:text-xl">
                         {item.description}
@@ -44,13 +44,15 @@ export function BlogCard({ item }: { item: Post }) {
                 </div>
 
                 <div className="relative order-1 aspect-[6/5] overflow-hidden rounded-lg md:aspect-[6/3] lg:order-2">
-                    <Image
-                        src={item.image}
-                        alt={item.title}
-                        className="object-cover"
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                    />
+                    <Link href={`/read/${slug}`}>
+                        <Image
+                            src={item.image}
+                            alt={item.title}
+                            className="object-cover"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                    </Link>
                 </div>
             </CardContent>
         </Card>
