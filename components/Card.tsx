@@ -13,8 +13,8 @@ import { Button } from '@/components/ui/button'
 import { ChevronRight } from 'lucide-react'
 
 export function BlogCard({ item }: { item: Post }) {
-    let GetDate = dayjs(item.date).format('DD MMM, YYYY')
-    let slug = item.title?.toLowerCase().replaceAll(' ', '-')
+    const GetDate = dayjs(item.date).format('DD MMM, YYYY')
+    const slug = item.title?.toLowerCase().replaceAll(' ', '-')
 
     return (
         <Card className="mx-auto my-8 w-full max-w-7xl overflow-hidden border-border">
