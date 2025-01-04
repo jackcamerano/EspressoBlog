@@ -24,21 +24,52 @@ export function ReadHeader({ item }: { item: Post }) {
                         </Link>
                     </Button>
                     <Label className="mx-2 text-left font-bold">
-                        Publish By {item.author}
+                        Published by {item.author}
                     </Label>
                     <Label className="mr-2 text-left font-bold">
                         on {getDate}
                     </Label>
-
-                    <Button variant="link" className="!px-0 font-bold" asChild>
-                        <Link
-                            className="capitalize"
-                            href={`/tag/${item.tags[0].trim().toLowerCase().replaceAll(' ', '-')}`}
-                        >
-                            <Tag /> {item.tags[0]}
-                        </Link>
-                    </Button>
                 </div>
+                {item.category && item.category.length > 0 && (
+                    <>
+                        Categories:
+                        {item.category.map((category, index) => (
+                            <Button
+                                key={index}
+                                variant="link"
+                                className="!px-1 font-bold"
+                                asChild
+                            >
+                                <Link
+                                    className="capitalize"
+                                    href={`/category/${category.trim().toLowerCase().replaceAll(' ', '-')}`}
+                                >
+                                    <Tag /> {category}
+                                </Link>
+                            </Button>
+                        ))}
+                    </>
+                )}
+                {item.tags && item.tags.length > 0 && (
+                    <>
+                        Tags:
+                        {item.tags.map((tag, index) => (
+                            <Button
+                                key={index}
+                                variant="link"
+                                className="!px-1 font-bold"
+                                asChild
+                            >
+                                <Link
+                                    className="capitalize"
+                                    href={`/tag/${tag.trim().toLowerCase().replaceAll(' ', '-')}`}
+                                >
+                                    <Tag /> {tag}
+                                </Link>
+                            </Button>
+                        ))}
+                    </>
+                )}
 
                 <CardTitle className="text-3xl font-extrabold lg:text-6xl">
                     {item.title}

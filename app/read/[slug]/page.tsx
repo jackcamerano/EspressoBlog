@@ -4,7 +4,7 @@ import { Newsletter } from '@/components/Newsletter'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { BlogCard } from '@/components/Card'
-import { GetAllPosts, GetPost, RelatedPosts } from '@/data'
+import { GetAllPosts, GetPost } from '@/data'
 import { Asterisk } from 'lucide-react'
 
 export const generateStaticParams = async () =>
@@ -38,7 +38,7 @@ export default async function Page({
         notFound()
     }
 
-    const getRelatedPosts: Post[] = RelatedPosts(post.tags[0], slug)
+    const getRelatedPosts: Post[] = [] //RelatedPosts(post.tags[0], slug)
     return (
         <>
             {post && <ReadHeader item={post} />}

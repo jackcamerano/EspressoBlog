@@ -16,12 +16,25 @@ export function BlogCard({ item }: { item: Post }) {
     const GetDate = dayjs(item.date).format('DD MMM, YYYY')
     const slug = item.title?.toLowerCase().replaceAll(' ', '-')
 
+    const categories = item.category?.map(item => {
+        return {
+            name: item,
+            slug: item.toLowerCase().replaceAll(' ', '-')
+        }
+    })
+
     return (
         <Card className="mx-auto my-8 w-full max-w-7xl overflow-hidden border-border">
             <CardContent className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2">
                 <div className="order-2 space-y-4 lg:order-1">
                     <div className="mb-4 mt-4 flex items-center gap-3">
-                        <Badge className="rounded">{item.category[0]}</Badge>
+                        {categories.map((cat, index) => (
+                            <Badge key={index} className="rounded">
+                                <Link href={`/category/${cat.slug}`}>
+                                    {cat.name}
+                                </Link>
+                            </Badge>
+                        ))}
                         <span className="text-sm text-muted-foreground">
                             {GetDate}
                         </span>
