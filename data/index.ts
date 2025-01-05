@@ -1,19 +1,40 @@
 import { posts as allPosts } from '@/data/posts'
 import type { Post } from '@/types'
 
+const token = process.env.STRAPI_API_TOKEN
+const baseUrl = process.env.STRAPI_API_URL
+
 function slugify(slug: string) {
     return slug.toLowerCase().trim().split(' ').join('-')
 }
 
 // Home Page
-export function GetAllPosts() {
-    console.log(allPosts[1])
-    return allPosts
+export async function GetAllPosts() {
+    const data = await fetch(
+        `${baseUrl}/api/posts?populate=*&sort=publishedAt:desc`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    )
+    const strapiPosts = await data.json()
+    return strapiPosts?.data || []
 }
 
 // Read page
-export function GetPost(slug: string) {
-    return allPosts.find(post => post?.slug === slug)
+export async function GetPost(slug: string) {
+    const data = await fetch(
+        `${baseUrl}/api/posts?filters[slug][$eq]=${slug}&populate=*`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    )
+    const strapiPosts = await data.json()
+
+    return strapiPosts?.data[0] || []
 }
 
 export function RelatedPosts(tag: string, dontInclude: string) {
@@ -33,23 +54,34 @@ export function RelatedPosts(tag: string, dontInclude: string) {
     return RelatedPosts
 }
 
-// Category Page
-export async function GetCategoryPost(slug: string) {
-    const CategoryPosts: Post[] = []
-
-    allPosts.map(post => {
-        if (post.category) {
-            post.category.filter(category => {
-                if (
-                    category.toLowerCase().trim().split(' ').join('-') === slug
-                ) {
-                    CategoryPosts.push(post)
-                }
-            })
+// Category page
+export async function GetCategory(slug: string) {
+    const data = await fetch(
+        `${baseUrl}/api/categories?filters[slug][$eq]=${slug}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }
-    })
+    )
+    const strapiCategories = await data.json()
 
-    return CategoryPosts
+    return strapiCategories?.data[0] || []
+}
+
+// Category Page
+export async function GetPostsByCategory(slug: string) {
+    const data = await fetch(
+        `${baseUrl}/api/posts?filters[categories][slug][$eq]=${slug}&populate=*`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    )
+    const strapiPosts = await data.json()
+
+    return strapiPosts?.data || []
 }
 
 // Category Page
@@ -74,20 +106,18 @@ export async function GetCategories() {
 }
 
 // Tag Page
-export async function GetTagsPost(slug: string) {
-    const TagPosts: Post[] = []
-
-    allPosts.map(post => {
-        if (post.tags) {
-            post.tags.filter(tag => {
-                if (tag.toLowerCase().trim().split(' ').join('-') === slug) {
-                    TagPosts.push(post)
-                }
-            })
+export async function GetPostsByTag(slug: string) {
+    const data = await fetch(
+        `${baseUrl}/api/posts?filters[tags][slug][$eq]=${slug}&populate=*`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }
-    })
+    )
+    const strapiPosts = await data.json()
 
-    return TagPosts
+    return strapiPosts?.data || []
 }
 
 // Tag Page

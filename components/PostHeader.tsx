@@ -13,7 +13,7 @@ import dayjs from 'dayjs'
 import { Button } from '@/components/ui/button'
 
 export function ReadHeader({ item }: { item: Post }) {
-    const getDate = dayjs(item.date).format('DD MMM, YYYY')
+    const getDate = dayjs(item.publishedAt).format('DD MMM, YYYY')
     return (
         <Card className="mx-auto mt-12 flex max-w-6xl flex-col border-none shadow-none">
             <CardContent>
@@ -24,16 +24,16 @@ export function ReadHeader({ item }: { item: Post }) {
                         </Link>
                     </Button>
                     <Label className="mx-2 text-left font-bold">
-                        Published by {item.author}
+                        Published by {item.author.firstname}
                     </Label>
                     <Label className="mr-2 text-left font-bold">
                         on {getDate}
                     </Label>
                 </div>
-                {item.category && item.category.length > 0 && (
+                {item.categories && item.categories.length > 0 && (
                     <>
                         Categories:
-                        {item.category.map((category, index) => (
+                        {item.categories.map((category, index) => (
                             <Button
                                 key={index}
                                 variant="link"
@@ -42,9 +42,9 @@ export function ReadHeader({ item }: { item: Post }) {
                             >
                                 <Link
                                     className="capitalize"
-                                    href={`/category/${category.trim().toLowerCase().replaceAll(' ', '-')}`}
+                                    href={`/category/${category.slug}`}
                                 >
-                                    <Tag /> {category}
+                                    <Tag /> {category.name}
                                 </Link>
                             </Button>
                         ))}
@@ -62,9 +62,9 @@ export function ReadHeader({ item }: { item: Post }) {
                             >
                                 <Link
                                     className="capitalize"
-                                    href={`/tag/${tag.trim().toLowerCase().replaceAll(' ', '-')}`}
+                                    href={`/tag/${tag.slug}`}
                                 >
-                                    <Tag /> {tag}
+                                    <Tag /> {tag.name}
                                 </Link>
                             </Button>
                         ))}

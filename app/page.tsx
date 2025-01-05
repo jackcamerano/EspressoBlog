@@ -11,8 +11,8 @@ export const metadata: Metadata = {
         'Blogify is an open-source nextjs blog template design with tailwind CSS.'
 }
 
-export default function Page() {
-    const posts = GetAllPosts()
+export default async function Page() {
+    const posts = await GetAllPosts()
     return (
         <>
             <Hero />
