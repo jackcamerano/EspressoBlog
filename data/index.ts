@@ -68,7 +68,7 @@ export async function GetPostsByTag(slug: string) {
 
 // Tag Page
 export async function GetTags() {
-    const url = `${baseUrl}/api/categories?populate=*`
+    const url = `${baseUrl}/api/tags?populate=*`
 
     return await strapiFetch<Tag[]>(url, [])
 }
