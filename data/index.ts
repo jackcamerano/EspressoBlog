@@ -1,108 +1,74 @@
-import { posts as allPosts } from '@/data/posts'
-import type { Post } from '@/types'
+import type { Category, Post, Tag } from '@/types'
 
-function slugify(slug: string) {
-    return slug.toLowerCase().trim().split(' ').join('-')
+const token = process.env.STRAPI_API_TOKEN
+const baseUrl = process.env.STRAPI_API_URL
+
+interface StrapiResponse<T> {
+    data?: T
+    [key: string]: unknown
+}
+
+async function strapiFetch<T>(url: string, defaultValue: T): Promise<T> {
+    const res = await fetch(url, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+
+    if (!res.ok) {
+        console.error(`Strapi fetch failed: ${res.status} ${res.statusText}`)
+        return defaultValue
+    }
+
+    const json = (await res.json()) as StrapiResponse<T>
+    return json.data ?? defaultValue
 }
 
 // Home Page
-export function GetAllPosts() {
-    console.log(allPosts[1])
-    return allPosts
+export async function GetAllPosts() {
+    const url = `${baseUrl}/api/posts?populate=*&sort=publishedAt:desc`
+
+    return await strapiFetch<Post[]>(url, [])
 }
 
 // Read page
-export function GetPost(slug: string) {
-    return allPosts.find(post => post?.slug === slug)
+export async function GetPost(slug: string) {
+    const url = `${baseUrl}/api/posts?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`
+
+    return (await strapiFetch<Post[]>(url, []))[0] ?? null
 }
 
-export function RelatedPosts(tag: string, dontInclude: string) {
-    const RelatedPosts: Post[] = []
+// Category page
+export async function GetCategory(slug: string) {
+    const url = `${baseUrl}/api/categories?filters[slug][$eq]=${encodeURIComponent(slug)}`
 
-    allPosts.map(post => {
-        if (post.tags) {
-            post.tags.filter(item => {
-                if (slugify(item) === slugify(tag)) {
-                    if (dontInclude !== post.slug) {
-                        RelatedPosts.push(post)
-                    }
-                }
-            })
-        }
-    })
-    return RelatedPosts
+    return (await strapiFetch<Category[]>(url, []))[0] ?? null
 }
 
 // Category Page
-export async function GetCategoryPost(slug: string) {
-    const CategoryPosts: Post[] = []
+export async function GetPostsByCategory(slug: string) {
+    const url = `${baseUrl}/api/posts?filters[categories][slug][$eq]=${encodeURIComponent(slug)}&populate=*`
 
-    allPosts.map(post => {
-        if (post.category) {
-            post.category.filter(category => {
-                if (
-                    category.toLowerCase().trim().split(' ').join('-') === slug
-                ) {
-                    CategoryPosts.push(post)
-                }
-            })
-        }
-    })
-
-    return CategoryPosts
+    return await strapiFetch<Post[]>(url, [])
 }
 
 // Category Page
 export async function GetCategories() {
-    const CategoryList: { slug: string }[] = []
+    const url = `${baseUrl}/api/categories?populate=*`
 
-    allPosts.map(post => {
-        if (post.category) {
-            post.category.filter(tag => {
-                const formatCategory = tag
-                    .toLowerCase()
-                    .trim()
-                    .split(' ')
-                    .join('-')
-                if (formatCategory) {
-                    CategoryList.push({ slug: formatCategory })
-                }
-            })
-        }
-    })
-    return CategoryList
+    return await strapiFetch<Category[]>(url, [])
 }
 
 // Tag Page
-export async function GetTagsPost(slug: string) {
-    const TagPosts: Post[] = []
+export async function GetPostsByTag(slug: string) {
+    const url = `${baseUrl}/api/posts?filters[tags][slug][$eq]=${encodeURIComponent(slug)}&populate=*`
 
-    allPosts.map(post => {
-        if (post.tags) {
-            post.tags.filter(tag => {
-                if (tag.toLowerCase().trim().split(' ').join('-') === slug) {
-                    TagPosts.push(post)
-                }
-            })
-        }
-    })
-
-    return TagPosts
+    return await strapiFetch<Post[]>(url, [])
 }
 
 // Tag Page
 export async function GetTags() {
-    const TagsList: { slug: string }[] = []
+    const url = `${baseUrl}/api/tags?populate=*`
 
-    allPosts.map(post => {
-        if (post.tags !== undefined) {
-            post.tags.filter(tag => {
-                const formatTag = tag.toLowerCase().trim().split(' ').join('-')
-                if (formatTag) {
-                    TagsList.push({ slug: formatTag })
-                }
-            })
-        }
-    })
-    return TagsList
+    return await strapiFetch<Tag[]>(url, [])
 }
