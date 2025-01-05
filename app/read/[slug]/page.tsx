@@ -1,12 +1,12 @@
-import markdownit from 'markdown-it'
-import { ReadHeader } from '@/components/PostHeader'
-import { Post } from '@/types'
-import { Newsletter } from '@/components/Newsletter'
+import { Asterisk } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { BlogCard } from '@/components/Card'
 import { GetAllPosts, GetPost } from '@/data'
-import { Asterisk } from 'lucide-react'
+import { Post } from '@/types'
+import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
+import { BlogCard } from '@/components/Card'
+import { Newsletter } from '@/components/Newsletter'
+import { ReadHeader } from '@/components/PostHeader'
 
 export const generateStaticParams = async () =>
     (await GetAllPosts()).map(post => ({ slug: post.slug }))
@@ -39,8 +39,7 @@ export default async function Page({
         notFound()
     }
 
-    const md = new markdownit()
-    const content = md.render(post.content)
+    const content = renderAndSanitizeMarkdown(post.content)
 
     const getRelatedPosts: Post[] = [] //RelatedPosts(post.tags[0], slug)
     return (
