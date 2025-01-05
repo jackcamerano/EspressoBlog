@@ -35,7 +35,7 @@ export default async function Page({
     const slug = (await params).slug
     const post = await GetPost(slug)
 
-    if (post === undefined) {
+    if (!post) {
         notFound()
     }
 
