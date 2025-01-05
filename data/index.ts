@@ -14,6 +14,12 @@ async function strapiFetch<T>(url: string, defaultValue: T): Promise<T> {
             Authorization: `Bearer ${token}`
         }
     })
+
+    if (!res.ok) {
+        console.error(`Strapi fetch failed: ${res.status} ${res.statusText}`)
+        return defaultValue
+    }
+
     const json = (await res.json()) as StrapiResponse<T>
     return json.data ?? defaultValue
 }
