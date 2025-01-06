@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 
 import { BlogCard } from '@/components/Card'
-import { GetCategories, GetPostsByCategory } from '@/data'
+import { getCategories, getPostsByCategory } from '@/data'
 
 import type { Post } from '@/types'
 import type { Metadata } from 'next'
@@ -18,7 +18,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-    return await GetCategories()
+    return await getCategories()
 }
 
 export default async function Page({
@@ -27,7 +27,7 @@ export default async function Page({
     params: Promise<{ slug: string }>
 }) {
     const slug = (await params).slug
-    const posts = await GetPostsByCategory(slug)
+    const posts = await getPostsByCategory(slug)
     if (posts.length === 0) {
         notFound()
     }

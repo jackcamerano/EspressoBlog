@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { BlogCard } from '@/components/Card'
 import { Hero } from '@/components/Hero'
 import { Newsletter } from '@/components/Newsletter'
-import { GetAllPosts } from '@/data'
+import { getAllPosts } from '@/data'
 
 import { Pagination } from '../components/Pagination'
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-    const posts = await GetAllPosts()
+    const posts = await getAllPosts()
     return (
         <>
             <Hero />

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 
 import { BlogCard } from '@/components/Card'
-import { GetPostsByTag, GetTags } from '@/data'
+import { getPostsByTag, GetTags } from '@/data'
 
 import type { Post } from '@/types'
 import type { Metadata } from 'next'
@@ -25,7 +25,7 @@ export default async function Page({
     params: Promise<{ slug: string }>
 }) {
     const slug = (await params).slug
-    const posts = await GetPostsByTag(slug)
+    const posts = await getPostsByTag(slug)
     if (posts.length === 0) {
         notFound()
     }

@@ -5,12 +5,12 @@ import { notFound } from 'next/navigation'
 import { BlogCard } from '@/components/Card'
 import { Newsletter } from '@/components/Newsletter'
 import { ReadHeader } from '@/components/PostHeader'
-import { GetAllPosts, GetPost } from '@/data'
+import { getAllPosts, getPost } from '@/data'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
 import { Post } from '@/types'
 
 export const generateStaticParams = async () =>
-    (await GetAllPosts()).map(post => ({ slug: post.slug }))
+    (await getAllPosts()).map(post => ({ slug: post.slug }))
 
 export async function generateMetadata({
     params
@@ -19,7 +19,7 @@ export async function generateMetadata({
 }) {
     const slug = (await params).slug
 
-    const post = await GetPost(slug)
+    const post = await getPost(slug)
 
     if (!post) {
         notFound()
@@ -34,7 +34,7 @@ export default async function Page({
     params: Promise<{ slug: string }>
 }) {
     const slug = (await params).slug
-    const post = await GetPost(slug)
+    const post = await getPost(slug)
 
     if (!post) {
         notFound()
