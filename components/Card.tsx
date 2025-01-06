@@ -1,7 +1,7 @@
-import Link from '@/node_modules/next/link'
 import dayjs from 'dayjs'
 import { ChevronRight } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
