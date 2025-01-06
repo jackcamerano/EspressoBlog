@@ -1,9 +1,11 @@
-import { Newsletter } from '@/components/Newsletter'
-import { Pagination } from '../components/Pagination'
+import { Metadata } from 'next'
+
 import { BlogCard } from '@/components/Card'
 import { Hero } from '@/components/Hero'
-import { GetAllPosts } from '@/data'
-import { Metadata } from 'next'
+import { Newsletter } from '@/components/Newsletter'
+import { getAllPosts } from '@/data'
+
+import { Pagination } from '../components/Pagination'
 
 export const metadata: Metadata = {
     title: 'Home | Blogify',
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-    const posts = await GetAllPosts()
+    const posts = await getAllPosts()
     return (
         <>
             <Hero />

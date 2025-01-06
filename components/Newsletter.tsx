@@ -4,7 +4,6 @@ export function Newsletter() {
     return (
         <section>
             <div className="mx-auto my-16 w-full max-w-7xl bg-secondary px-5 py-16 md:px-10 md:py-20">
-                {/* Component */}
                 <div className="grid justify-items-center gap-4 bg-red-300 p-8 sm:p-10 lg:grid-cols-[1.5fr_1fr] lg:justify-items-start lg:p-16">
                     <div className="text-center md:text-start">
                         <h2 className="mb-2 text-3xl font-bold md:text-4xl">

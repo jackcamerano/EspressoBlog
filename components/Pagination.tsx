@@ -1,4 +1,6 @@
 import React from 'react'
+
+import { Label } from '@/components/ui/label'
 import {
     Pagination as PaginationBox,
     PaginationContent,
@@ -6,7 +8,6 @@ import {
     PaginationNext,
     PaginationPrevious
 } from '@/components/ui/pagination'
-import { Label } from '@/components/ui/label'
 
 export function Pagination() {
     return (

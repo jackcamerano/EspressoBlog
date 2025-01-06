@@ -1,5 +1,6 @@
-import Link from '@/node_modules/next/link'
+import Link from 'next/link'
 import React from 'react'
+
 import { Button } from '@/components/ui/button'
 
 function Footer() {

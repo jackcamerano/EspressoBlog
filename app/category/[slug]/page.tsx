@@ -1,8 +1,10 @@
+import { notFound } from 'next/navigation'
+
 import { BlogCard } from '@/components/Card'
-import { GetCategories, GetPostsByCategory } from '@/data'
+import { getCategories, getPostsByCategory } from '@/data'
+
 import type { Post } from '@/types'
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
 export async function generateMetadata({
     params
@@ -10,13 +12,14 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>
 }): Promise<Metadata> {
     const { slug } = await params
+
     return {
         title: `Articles Categorised as ${slug?.trim().replaceAll(' ', '-')}`
     }
 }
 
 export async function generateStaticParams() {
-    return await GetCategories()
+    return await getCategories()
 }
 
 export default async function Page({
@@ -24,16 +27,21 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
-    const posts = await GetPostsByCategory(slug)
+    const { slug } = await params
+
+    const posts = await getPostsByCategory(slug)
+
     if (posts.length === 0) {
         notFound()
     }
+
+    const title = slug.replaceAll('-', ' ')
+
     return (
         <>
             <div className="container mx-auto my-24 px-4">
                 <h2 className="my-8 text-3xl font-bold capitalize">
-                    Articles Categorised as {slug.replaceAll('-', ' ')}
+                    Articles Categorised as {title}
                 </h2>
             </div>
 

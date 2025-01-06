@@ -25,42 +25,42 @@ async function strapiFetch<T>(url: string, defaultValue: T): Promise<T> {
 }
 
 // Home Page
-export async function GetAllPosts() {
+export async function getAllPosts() {
     const url = `${baseUrl}/api/posts?populate=*&sort=publishedAt:desc`
 
     return await strapiFetch<Post[]>(url, [])
 }
 
 // Read page
-export async function GetPost(slug: string) {
+export async function getPost(slug: string) {
     const url = `${baseUrl}/api/posts?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`
 
     return (await strapiFetch<Post[]>(url, []))[0] ?? null
 }
 
 // Category page
-export async function GetCategory(slug: string) {
+export async function getCategory(slug: string) {
     const url = `${baseUrl}/api/categories?filters[slug][$eq]=${encodeURIComponent(slug)}`
 
     return (await strapiFetch<Category[]>(url, []))[0] ?? null
 }
 
 // Category Page
-export async function GetPostsByCategory(slug: string) {
+export async function getPostsByCategory(slug: string) {
     const url = `${baseUrl}/api/posts?filters[categories][slug][$eq]=${encodeURIComponent(slug)}&populate=*`
 
     return await strapiFetch<Post[]>(url, [])
 }
 
 // Category Page
-export async function GetCategories() {
+export async function getCategories() {
     const url = `${baseUrl}/api/categories?populate=*`
 
     return await strapiFetch<Category[]>(url, [])
 }
 
 // Tag Page
-export async function GetPostsByTag(slug: string) {
+export async function getPostsByTag(slug: string) {
     const url = `${baseUrl}/api/posts?filters[tags][slug][$eq]=${encodeURIComponent(slug)}&populate=*`
 
     return await strapiFetch<Post[]>(url, [])

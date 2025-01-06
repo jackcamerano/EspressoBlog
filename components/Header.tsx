@@ -1,16 +1,8 @@
 'use client'
 
-import * as React from 'react'
 import Link from 'next/link'
-import { cn } from '@/lib/utils'
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList
-} from '@/components/ui/navigation-menu'
-import { Button } from '@/components/ui/button'
-import { ThemeToggle } from '@/components/theme/theme-toggle'
+import * as React from 'react'
+
 import {
     Facebook,
     Instagram,
@@ -18,6 +10,15 @@ import {
     Linkedin,
     Logo
 } from '@/components/icons'
+import { ThemeToggle } from '@/components/theme/theme-toggle'
+import { Button } from '@/components/ui/button'
+import {
+    NavigationMenu,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList
+} from '@/components/ui/navigation-menu'
+import { classNames } from '@/lib/utils'
 
 export function Header() {
     return (
@@ -115,7 +116,7 @@ const ListItem = React.forwardRef<
             <NavigationMenuLink asChild>
                 <a
                     ref={ref}
-                    className={cn(
+                    className={classNames(
                         'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
                         className
                     )}

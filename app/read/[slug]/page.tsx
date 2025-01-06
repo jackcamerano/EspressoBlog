@@ -1,24 +1,25 @@
 import { Asterisk } from 'lucide-react'
-import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { GetAllPosts, GetPost } from '@/data'
-import { Post } from '@/types'
-import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
+import { notFound } from 'next/navigation'
+
 import { BlogCard } from '@/components/Card'
 import { Newsletter } from '@/components/Newsletter'
 import { ReadHeader } from '@/components/PostHeader'
+import { getAllPosts, getPost } from '@/data'
+import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
+import { Post } from '@/types'
 
 export const generateStaticParams = async () =>
-    (await GetAllPosts()).map(post => ({ slug: post.slug }))
+    (await getAllPosts()).map(post => ({ slug: post.slug }))
 
 export async function generateMetadata({
     params
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
+    const { slug } = await params
 
-    const post = await GetPost(slug)
+    const post = await getPost(slug)
 
     if (!post) {
         notFound()
@@ -32,8 +33,9 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
-    const post = await GetPost(slug)
+    const { slug } = await params
+
+    const post = await getPost(slug)
 
     if (!post) {
         notFound()
@@ -42,6 +44,7 @@ export default async function Page({
     const content = renderAndSanitizeMarkdown(post.content)
 
     const getRelatedPosts: Post[] = [] //RelatedPosts(post.tags[0], slug)
+
     return (
         <>
             {post && <ReadHeader item={post} />}
@@ -59,6 +62,7 @@ export default async function Page({
                     />
                 </div>
             )}
+
             <article className="container prose mx-auto max-w-6xl px-6 dark:prose-invert lg:prose-xl">
                 {content && (
                     <div dangerouslySetInnerHTML={{ __html: content }} />
@@ -75,6 +79,7 @@ export default async function Page({
             </div>
 
             <Newsletter />
+
             {getRelatedPosts.length !== 0 && (
                 <div className="container mx-auto mt-28">
                     <h1 className="text-3xl font-extrabold lg:text-6xl">

@@ -1,8 +1,10 @@
+import { notFound } from 'next/navigation'
+
 import { BlogCard } from '@/components/Card'
-import { GetPostsByTag, GetTags } from '@/data'
+import { getPostsByTag, GetTags } from '@/data'
+
 import type { Post } from '@/types'
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
 export async function generateMetadata({
     params
@@ -10,6 +12,7 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>
 }): Promise<Metadata> {
     const { slug } = await params
+
     return { title: `Articles Related to ${slug?.trim().replaceAll(' ', '-')}` }
 }
 
@@ -22,16 +25,21 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
-    const posts = await GetPostsByTag(slug)
+    const { slug } = await params
+
+    const posts = await getPostsByTag(slug)
+
     if (posts.length === 0) {
         notFound()
     }
+
+    const title = slug.replaceAll('-', ' ')
+
     return (
         <>
             <div className="container mx-auto my-24 px-4">
                 <h2 className="my-8 text-3xl font-bold capitalize">
-                    Articles Related to {slug.replaceAll('-', ' ')}
+                    Articles Related to {title}
                 </h2>
             </div>
 

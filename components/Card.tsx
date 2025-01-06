@@ -1,16 +1,17 @@
+import dayjs from 'dayjs'
+import { ChevronRight } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
     Card,
     CardContent,
     CardDescription,
     CardTitle
 } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import Image from 'next/image'
-import dayjs from 'dayjs'
 import { Post } from '@/types'
-import Link from '@/node_modules/next/link'
-import { Button } from '@/components/ui/button'
-import { ChevronRight } from 'lucide-react'
 
 export function BlogCard({ item }: { item: Post }) {
     const GetDate = dayjs(item.date).format('DD MMM, YYYY')
