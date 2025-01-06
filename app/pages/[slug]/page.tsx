@@ -6,7 +6,6 @@ import { Newsletter } from '@/components/Newsletter'
 import { Button } from '@/components/ui/button'
 import { Card, CardTitle, CardContent } from '@/components/ui/card'
 
-// pages
 const pages = [{ slug: 'about' }]
 
 export function generateStaticParams() {
@@ -18,7 +17,7 @@ export async function generateMetadata({
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
+    const { slug } = await params
 
     return { title: slug }
 }
@@ -27,8 +26,9 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
-    const getTitle = slug?.trim().replaceAll('-', ' ')
+    const { slug } = await params
+
+    const title = slug?.trim().replaceAll('-', ' ')
 
     return (
         <>
@@ -43,7 +43,7 @@ export default async function Page({
                     </div>
 
                     <CardTitle className="text-3xl font-extrabold capitalize lg:text-6xl">
-                        {getTitle}
+                        {title}
                     </CardTitle>
                 </CardContent>
             </Card>

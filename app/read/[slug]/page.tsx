@@ -17,7 +17,7 @@ export async function generateMetadata({
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
+    const { slug } = await params
 
     const post = await getPost(slug)
 
@@ -33,7 +33,8 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
+    const { slug } = await params
+
     const post = await getPost(slug)
 
     if (!post) {
@@ -43,6 +44,7 @@ export default async function Page({
     const content = renderAndSanitizeMarkdown(post.content)
 
     const getRelatedPosts: Post[] = [] //RelatedPosts(post.tags[0], slug)
+
     return (
         <>
             {post && <ReadHeader item={post} />}
@@ -60,6 +62,7 @@ export default async function Page({
                     />
                 </div>
             )}
+
             <article className="container prose mx-auto max-w-6xl px-6 dark:prose-invert lg:prose-xl">
                 {content && (
                     <div dangerouslySetInnerHTML={{ __html: content }} />
@@ -76,6 +79,7 @@ export default async function Page({
             </div>
 
             <Newsletter />
+
             {getRelatedPosts.length !== 0 && (
                 <div className="container mx-auto mt-28">
                     <h1 className="text-3xl font-extrabold lg:text-6xl">

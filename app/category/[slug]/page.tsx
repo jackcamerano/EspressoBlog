@@ -12,6 +12,7 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>
 }): Promise<Metadata> {
     const { slug } = await params
+
     return {
         title: `Articles Categorised as ${slug?.trim().replaceAll(' ', '-')}`
     }
@@ -26,16 +27,21 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
+    const { slug } = await params
+
     const posts = await getPostsByCategory(slug)
+
     if (posts.length === 0) {
         notFound()
     }
+
+    const title = slug.replaceAll('-', ' ')
+
     return (
         <>
             <div className="container mx-auto my-24 px-4">
                 <h2 className="my-8 text-3xl font-bold capitalize">
-                    Articles Categorised as {slug.replaceAll('-', ' ')}
+                    Articles Categorised as {title}
                 </h2>
             </div>
 
