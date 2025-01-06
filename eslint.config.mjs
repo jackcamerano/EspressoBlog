@@ -1,7 +1,9 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import js from '@eslint/js'
+
 import { FlatCompat } from '@eslint/eslintrc'
+import js from '@eslint/js'
+import importPlugin from 'eslint-plugin-import'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -26,6 +28,7 @@ const rules = [
         ]
     },
     ...compat.extends('next/core-web-vitals', 'next/typescript'),
+    ...compat.extends('plugin:import/recommended'),
     {
         rules: {
             '@next/next/no-img-element': 'off',
@@ -42,11 +45,27 @@ const rules = [
                     varsIgnorePattern: '^_',
                     caughtErrorsIgnorePattern: '^_'
                 }
+            ],
+            'import/order': [
+                'error',
+                {
+                    groups: [
+                        'builtin',
+                        'external',
+                        'internal',
+                        'parent',
+                        'sibling',
+                        'index',
+                        'type'
+                    ],
+                    alphabetize: { order: 'asc', caseInsensitive: true },
+                    'newlines-between': 'always'
+                }
             ]
         }
     },
     {
-        plugins: { unicorn: eslintPluginUnicorn }
+        plugins: { unicorn: eslintPluginUnicorn, import: importPlugin }
     }
 ]
 

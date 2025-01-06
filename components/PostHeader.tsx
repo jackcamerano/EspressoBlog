@@ -1,5 +1,9 @@
-import React from 'react'
+import dayjs from 'dayjs'
+import { ChevronLeft, Tag } from 'lucide-react'
 import Link from 'next/link'
+import React from 'react'
+
+import { Button } from '@/components/ui/button'
 import {
     Card,
     CardTitle,
@@ -7,10 +11,8 @@ import {
     CardContent
 } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
+
 import type { Post } from '@/types'
-import { ChevronLeft, Tag } from 'lucide-react'
-import dayjs from 'dayjs'
-import { Button } from '@/components/ui/button'
 
 export function ReadHeader({ item }: { item: Post }) {
     const getDate = dayjs(item.publishedAt).format('DD MMM, YYYY')

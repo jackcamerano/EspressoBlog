@@ -1,8 +1,10 @@
+import { notFound } from 'next/navigation'
+
 import { BlogCard } from '@/components/Card'
 import { GetCategories, GetPostsByCategory } from '@/data'
+
 import type { Post } from '@/types'
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
 export async function generateMetadata({
     params

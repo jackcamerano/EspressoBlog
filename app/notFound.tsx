@@ -1,3 +1,6 @@
+import Link from '@/node_modules/next/link'
+import React from 'react'
+
 import { Button } from '@/components/ui/button'
 import {
     Card,
@@ -5,8 +8,6 @@ import {
     CardDescription,
     CardTitle
 } from '@/components/ui/card'
-import Link from '@/node_modules/next/link'
-import React from 'react'
 
 export default function Notfound() {
     return (

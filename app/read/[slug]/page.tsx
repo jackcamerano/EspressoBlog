@@ -1,12 +1,13 @@
 import { Asterisk } from 'lucide-react'
-import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { GetAllPosts, GetPost } from '@/data'
-import { Post } from '@/types'
-import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
+import { notFound } from 'next/navigation'
+
 import { BlogCard } from '@/components/Card'
 import { Newsletter } from '@/components/Newsletter'
 import { ReadHeader } from '@/components/PostHeader'
+import { GetAllPosts, GetPost } from '@/data'
+import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
+import { Post } from '@/types'
 
 export const generateStaticParams = async () =>
     (await GetAllPosts()).map(post => ({ slug: post.slug }))

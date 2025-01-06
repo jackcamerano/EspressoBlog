@@ -1,9 +1,11 @@
-import { Newsletter } from '@/components/Newsletter'
-import { Pagination } from '../components/Pagination'
+import { Metadata } from 'next'
+
 import { BlogCard } from '@/components/Card'
 import { Hero } from '@/components/Hero'
+import { Newsletter } from '@/components/Newsletter'
 import { GetAllPosts } from '@/data'
-import { Metadata } from 'next'
+
+import { Pagination } from '../components/Pagination'
 
 export const metadata: Metadata = {
     title: 'Home | Blogify',

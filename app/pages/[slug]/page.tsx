@@ -1,9 +1,10 @@
-import React from 'react'
-import Link from 'next/link'
-import { Card, CardTitle, CardContent } from '@/components/ui/card'
 import { Asterisk, ChevronLeft } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import React from 'react'
+
 import { Newsletter } from '@/components/Newsletter'
+import { Button } from '@/components/ui/button'
+import { Card, CardTitle, CardContent } from '@/components/ui/card'
 
 // pages
 const pages = [{ slug: 'about' }]

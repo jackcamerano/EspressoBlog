@@ -1,8 +1,9 @@
-import type { Config } from 'tailwindcss/types/config'
-import plugin from 'tailwindcss/plugin'
-import svgToDataUri from 'mini-svg-data-uri'
 import typography from '@tailwindcss/typography'
+import svgToDataUri from 'mini-svg-data-uri'
+import plugin from 'tailwindcss/plugin'
 import tailwindcssAnimate from 'tailwindcss-animate'
+
+import type { Config } from 'tailwindcss/types/config'
 
 function flattenColors(
     colors: Record<string, string> | Record<string, unknown>

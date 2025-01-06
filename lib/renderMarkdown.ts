@@ -1,5 +1,5 @@
-import sanitizeHtml from 'sanitize-html'
 import markdownit from 'markdown-it'
+import sanitizeHtml from 'sanitize-html'
 
 const md = new markdownit()
 

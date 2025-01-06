@@ -1,16 +1,8 @@
 'use client'
 
-import * as React from 'react'
 import Link from 'next/link'
-import { cn } from '@/lib/utils'
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList
-} from '@/components/ui/navigation-menu'
-import { Button } from '@/components/ui/button'
-import { ThemeToggle } from '@/components/theme/theme-toggle'
+import * as React from 'react'
+
 import {
     Facebook,
     Instagram,
@@ -18,6 +10,15 @@ import {
     Linkedin,
     Logo
 } from '@/components/icons'
+import { ThemeToggle } from '@/components/theme/theme-toggle'
+import { Button } from '@/components/ui/button'
+import {
+    NavigationMenu,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList
+} from '@/components/ui/navigation-menu'
+import { cn } from '@/lib/utils'
 
 export function Header() {
     return (

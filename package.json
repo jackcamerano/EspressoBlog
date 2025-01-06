@@ -45,6 +45,7 @@
         "cssnano": "^7.0.6",
         "eslint": "9.15.0",
         "eslint-config-next": "15.0.3",
+        "eslint-plugin-import": "^2.31.0",
         "eslint-plugin-unicorn": "^56.0.1",
         "husky": "^9.1.7",
         "lint-staged": "^15.3.0",
