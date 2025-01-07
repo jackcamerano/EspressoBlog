@@ -1,7 +1,9 @@
+import { config } from '@/next.config'
+
 import type { Category, Post, Tag } from '@/types'
 
-const token = process.env.STRAPI_API_TOKEN
-const baseUrl = process.env.STRAPI_API_URL
+const token = config.STRAPI_API_TOKEN
+const baseUrl = config.STRAPI_API_URL
 
 interface StrapiResponse<T> {
     data?: T
