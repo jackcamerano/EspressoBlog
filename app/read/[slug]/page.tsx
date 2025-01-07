@@ -53,7 +53,10 @@ export default async function Page({
             {post?.featuredImage && (
                 <div className="relative my-10 aspect-[4/3] overflow-hidden">
                     <Image
-                        src={config.STRAPI_API_URL + post.featuredImage.url}
+                        src={new URL(
+                            post.featuredImage.url,
+                            config.STRAPI_API_URL
+                        ).toString()}
                         alt={post.featuredImage.alternativeText ?? post.title}
                         className="object-cover"
                         fill

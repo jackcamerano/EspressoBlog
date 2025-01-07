@@ -54,10 +54,10 @@ export function BlogCard({ item }: { item: Post }) {
                     {item.featuredImage && (
                         <Link href={`/read/${item.slug}`}>
                             <Image
-                                src={
-                                    config.STRAPI_API_URL +
-                                    item.featuredImage.url
-                                }
+                                src={new URL(
+                                    item.featuredImage.url,
+                                    config.STRAPI_API_URL
+                                ).toString()}
                                 alt={
                                     item.featuredImage.alternativeText ??
                                     item.title
