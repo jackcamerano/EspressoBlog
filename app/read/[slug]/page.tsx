@@ -43,7 +43,9 @@ export default async function Page({
 
     const content = renderAndSanitizeMarkdown(post.content)
 
-    const relatedPosts = await getRelatedPosts(post.tags[0].slug, slug)
+    const relatedPosts = post.tags?.length
+        ? await getRelatedPosts(post.tags[0].slug, slug)
+        : []
 
     return (
         <>

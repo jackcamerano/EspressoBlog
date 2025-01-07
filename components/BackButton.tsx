@@ -3,10 +3,14 @@ import Link from 'next/link'
 
 import { Button } from './ui/button'
 
-export function BackButton() {
+type BackButtonProps = {
+    href?: string
+}
+
+export function BackButton({ href = '/' }: BackButtonProps) {
     return (
-        <Button className="rounded-2xl" asChild>
-            <Link href="/">
+        <Button className="rounded-2xl" asChild aria-label="Go back">
+            <Link href={href}>
                 <ChevronLeft /> Back
             </Link>
         </Button>

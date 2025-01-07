@@ -80,7 +80,5 @@ export async function getRelatedPosts(tag: string, slug: string) {
         slug
     )}&filters[tags][slug][$eq]=${encodeURIComponent(tag)}&populate=*`
 
-    console.log(url)
-
     return await strapiFetch<Post[]>(url, [])
 }

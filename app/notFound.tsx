@@ -16,10 +16,9 @@ export default function Notfound() {
                     404 Error
                 </CardTitle>
                 <CardDescription className="mx-auto mb-5 text-lg md:mb-6 lg:mb-8">
-                    {' '}
                     Commodo, consequat turpis placerat ultrices sapien, tortor
                     tincidunt. Sit quisque est metus auctor sed turpis lectus
-                    quis.{' '}
+                    quis.
                 </CardDescription>
                 <BackButton />
             </CardContent>

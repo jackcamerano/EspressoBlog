@@ -2,12 +2,12 @@ import { Post } from '@/types'
 
 import { BlogCard } from './Card'
 
-type Props = {
-    title: string
+type PostArchiveProps = {
+    title?: string
     posts: Post[]
 }
 
-export const PostArchives = ({ title, posts }: Props) => {
+export const PostArchives = ({ title = 'Posts', posts }: PostArchiveProps) => {
     return (
         <>
             <div className="container mx-auto my-24 px-4">
