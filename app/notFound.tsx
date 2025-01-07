@@ -1,7 +1,6 @@
-import Link from 'next/link'
 import React from 'react'
 
-import { Button } from '@/components/ui/button'
+import { BackButton } from '@/components/BackButton'
 import {
     Card,
     CardContent,
@@ -22,9 +21,7 @@ export default function Notfound() {
                     tincidunt. Sit quisque est metus auctor sed turpis lectus
                     quis.{' '}
                 </CardDescription>
-                <Button className="mt-4 rounded-2xl" asChild>
-                    <Link href="/"> Back Home </Link>
-                </Button>
+                <BackButton />
             </CardContent>
         </Card>
     )

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { ChevronLeft, Tag } from 'lucide-react'
+import { Tag } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -12,6 +12,8 @@ import {
 } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 
+import { BackButton } from './BackButton'
+
 import type { Post } from '@/types'
 
 export function ReadHeader({ item }: { item: Post }) {
@@ -20,11 +22,7 @@ export function ReadHeader({ item }: { item: Post }) {
         <Card className="mx-auto mt-12 flex max-w-6xl flex-col border-none shadow-none">
             <CardContent>
                 <div className="mb-3 flex flex-row items-center text-center">
-                    <Button className="rounded-2xl" asChild>
-                        <Link href="/">
-                            <ChevronLeft /> Back
-                        </Link>
-                    </Button>
+                    <BackButton />
                     <Label className="mx-2 text-left font-bold">
                         Published by {item.author.firstname}
                     </Label>

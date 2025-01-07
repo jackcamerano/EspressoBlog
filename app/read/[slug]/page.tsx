@@ -85,8 +85,7 @@ export default async function Page({
             {getRelatedPosts.length !== 0 && (
                 <div className="container mx-auto mt-28">
                     <h1 className="text-3xl font-extrabold lg:text-6xl">
-                        {' '}
-                        Related Posts{' '}
+                        Related Posts
                     </h1>
                     {getRelatedPosts?.map(item => {
                         return <BlogCard key={item.id} item={item} />
