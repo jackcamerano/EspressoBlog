@@ -2,13 +2,12 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
 import { AsteriskFooter } from '@/components/AsteriskFooter'
-import { BlogCard } from '@/components/Card'
 import { Newsletter } from '@/components/Newsletter'
+import { PostArchives } from '@/components/PostArchive'
 import { ReadHeader } from '@/components/PostHeader'
-import { getAllPosts, getPost } from '@/data'
+import { getAllPosts, getPost, getRelatedPosts } from '@/data'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
 import { config } from '@/next.config'
-import { Post } from '@/types'
 
 export const generateStaticParams = async () =>
     (await getAllPosts()).map(post => ({ slug: post.slug }))
@@ -44,7 +43,7 @@ export default async function Page({
 
     const content = renderAndSanitizeMarkdown(post.content)
 
-    const getRelatedPosts: Post[] = [] //RelatedPosts(post.tags[0], slug)
+    const relatedPosts = await getRelatedPosts(post.tags[0].slug, slug)
 
     return (
         <>
@@ -75,15 +74,8 @@ export default async function Page({
 
             <Newsletter />
 
-            {getRelatedPosts.length !== 0 && (
-                <div className="container mx-auto mt-28">
-                    <h1 className="text-3xl font-extrabold lg:text-6xl">
-                        Related Posts
-                    </h1>
-                    {getRelatedPosts?.map(item => {
-                        return <BlogCard key={item.id} item={item} />
-                    })}
-                </div>
+            {relatedPosts.length !== 0 && (
+                <PostArchives title="Related posts" posts={relatedPosts} />
             )}
         </>
     )
