@@ -1,9 +1,8 @@
 import { notFound } from 'next/navigation'
 
-import { BlogCard } from '@/components/Card'
+import { PostArchives } from '@/components/PostArchive'
 import { getCategories, getPostsByCategory } from '@/data'
 
-import type { Post } from '@/types'
 import type { Metadata } from 'next'
 
 export async function generateMetadata({
@@ -38,18 +37,9 @@ export default async function Page({
     const title = slug.replaceAll('-', ' ')
 
     return (
-        <>
-            <div className="container mx-auto my-24 px-4">
-                <h2 className="my-8 text-3xl font-bold capitalize">
-                    Articles Categorised as {title}
-                </h2>
-            </div>
-
-            <div className="container mx-auto mt-8">
-                {posts.map((item: Post) => (
-                    <BlogCard item={item} key={item.id} />
-                ))}
-            </div>
-        </>
+        <PostArchives
+            title={`Articles Categorised as ${title}`}
+            posts={posts}
+        />
     )
 }

@@ -1,9 +1,8 @@
-import { Asterisk, ChevronLeft } from 'lucide-react'
-import Link from 'next/link'
 import React from 'react'
 
+import { AsteriskFooter } from '@/components/AsteriskFooter'
+import { BackButton } from '@/components/BackButton'
 import { Newsletter } from '@/components/Newsletter'
-import { Button } from '@/components/ui/button'
 import { Card, CardTitle, CardContent } from '@/components/ui/card'
 
 const pages = [{ slug: 'about' }]
@@ -34,13 +33,7 @@ export default async function Page({
         <>
             <Card className="mx-auto mt-12 flex max-w-6xl flex-col border-none bg-none shadow-none">
                 <CardContent>
-                    <div className="mb-3 flex flex-row items-center text-center">
-                        <Button className="rounded-2xl" asChild>
-                            <Link href="/">
-                                <ChevronLeft /> Back
-                            </Link>
-                        </Button>
-                    </div>
+                    <BackButton />
 
                     <CardTitle className="text-3xl font-extrabold capitalize lg:text-6xl">
                         {title}
@@ -175,14 +168,7 @@ export default async function Page({
                 </p>
             </article>
 
-            <div className="my-10 flex w-full items-center rounded-full">
-                <div className="border-fd-border flex-1 border-b"></div>
-                <span className="flex flex-row px-8 py-3 text-lg font-semibold leading-8">
-                    {' '}
-                    <Asterisk /> <Asterisk /> <Asterisk />{' '}
-                </span>
-                <div className="border-fd-border flex-1 border-b"></div>
-            </div>
+            <AsteriskFooter />
 
             <Newsletter />
         </>

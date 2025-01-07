@@ -1,7 +1,6 @@
-import Link from 'next/link'
 import React from 'react'
 
-import { Button } from '@/components/ui/button'
+import { BackButton } from '@/components/BackButton'
 import {
     Card,
     CardContent,
@@ -17,14 +16,11 @@ export default function Notfound() {
                     404 Error
                 </CardTitle>
                 <CardDescription className="mx-auto mb-5 text-lg md:mb-6 lg:mb-8">
-                    {' '}
                     Commodo, consequat turpis placerat ultrices sapien, tortor
                     tincidunt. Sit quisque est metus auctor sed turpis lectus
-                    quis.{' '}
+                    quis.
                 </CardDescription>
-                <Button className="mt-4 rounded-2xl" asChild>
-                    <Link href="/"> Back Home </Link>
-                </Button>
+                <BackButton />
             </CardContent>
         </Card>
     )

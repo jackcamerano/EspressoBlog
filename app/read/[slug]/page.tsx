@@ -1,14 +1,13 @@
-import { Asterisk } from 'lucide-react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
-import { BlogCard } from '@/components/Card'
+import { AsteriskFooter } from '@/components/AsteriskFooter'
 import { Newsletter } from '@/components/Newsletter'
+import { PostArchives } from '@/components/PostArchive'
 import { ReadHeader } from '@/components/PostHeader'
-import { getAllPosts, getPost } from '@/data'
+import { getAllPosts, getPost, getRelatedPosts } from '@/data'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
 import { config } from '@/next.config'
-import { Post } from '@/types'
 
 export const generateStaticParams = async () =>
     (await getAllPosts()).map(post => ({ slug: post.slug }))
@@ -44,7 +43,9 @@ export default async function Page({
 
     const content = renderAndSanitizeMarkdown(post.content)
 
-    const getRelatedPosts: Post[] = [] //RelatedPosts(post.tags[0], slug)
+    const relatedPosts = post.tags?.length
+        ? await getRelatedPosts(post.tags[0].slug, slug)
+        : []
 
     return (
         <>
@@ -71,27 +72,12 @@ export default async function Page({
                 )}
             </article>
 
-            <div className="my-10 flex w-full items-center rounded-full">
-                <div className="border-fd-border flex-1 border-b"></div>
-                <span className="flex flex-row px-8 py-3 text-lg font-semibold leading-8">
-                    {' '}
-                    <Asterisk /> <Asterisk /> <Asterisk />{' '}
-                </span>
-                <div className="border-fd-border flex-1 border-b"></div>
-            </div>
+            <AsteriskFooter />
 
             <Newsletter />
 
-            {getRelatedPosts.length !== 0 && (
-                <div className="container mx-auto mt-28">
-                    <h1 className="text-3xl font-extrabold lg:text-6xl">
-                        {' '}
-                        Related Posts{' '}
-                    </h1>
-                    {getRelatedPosts?.map(item => {
-                        return <BlogCard key={item.id} item={item} />
-                    })}
-                </div>
+            {relatedPosts.length !== 0 && (
+                <PostArchives title="Related posts" posts={relatedPosts} />
             )}
         </>
     )
