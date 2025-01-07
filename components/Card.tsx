@@ -11,6 +11,7 @@ import {
     CardDescription,
     CardTitle
 } from '@/components/ui/card'
+import { config } from '@/next.config'
 import { Post } from '@/types'
 
 export function BlogCard({ item }: { item: Post }) {
@@ -53,10 +54,10 @@ export function BlogCard({ item }: { item: Post }) {
                     {item.featuredImage && (
                         <Link href={`/read/${item.slug}`}>
                             <Image
-                                src={
-                                    process.env.STRAPI_API_URL +
-                                    item.featuredImage.url
-                                }
+                                src={new URL(
+                                    item.featuredImage.url,
+                                    config.STRAPI_API_URL
+                                ).toString()}
                                 alt={
                                     item.featuredImage.alternativeText ??
                                     item.title

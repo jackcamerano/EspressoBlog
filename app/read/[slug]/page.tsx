@@ -7,6 +7,7 @@ import { Newsletter } from '@/components/Newsletter'
 import { ReadHeader } from '@/components/PostHeader'
 import { getAllPosts, getPost } from '@/data'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
+import { config } from '@/next.config'
 import { Post } from '@/types'
 
 export const generateStaticParams = async () =>
@@ -52,9 +53,10 @@ export default async function Page({
             {post?.featuredImage && (
                 <div className="relative my-10 aspect-[4/3] overflow-hidden">
                     <Image
-                        src={
-                            process.env.STRAPI_API_URL + post.featuredImage.url
-                        }
+                        src={new URL(
+                            post.featuredImage.url,
+                            config.STRAPI_API_URL
+                        ).toString()}
                         alt={post.featuredImage.alternativeText ?? post.title}
                         className="object-cover"
                         fill
