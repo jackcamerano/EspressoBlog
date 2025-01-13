@@ -37,20 +37,6 @@ export interface Post {
     content: string
 }
 
-export interface ReadingPost {
-    id: string
-    title: string
-    description: string
-    date: string
-    tags: Tag[]
-    categories: Category[]
-    featuredImage: Image
-    author: Author
-    slug: string
-    publishedAt: string
-    content: string
-}
-
 export interface Page {
     id: string
     title: string
