@@ -1,6 +1,6 @@
 import { config } from '@/next.config'
 
-import type { Category, Post, Tag } from '@/types'
+import type { Category, Page, Post, Tag } from '@/types'
 
 const token = config.STRAPI_API_TOKEN
 const baseUrl = config.STRAPI_API_URL
@@ -81,4 +81,16 @@ export async function getRelatedPosts(tag: string, slug: string) {
     )}&filters[tags][slug][$eq]=${encodeURIComponent(tag)}&populate=*`
 
     return await strapiFetch<Post[]>(url, [])
+}
+
+export async function getAllPages() {
+    const url = `${baseUrl}/api/pages?populate=*`
+
+    return await strapiFetch<Page[]>(url, [])
+}
+
+export async function getPage(slug: string) {
+    const url = `${baseUrl}/api/pages?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`
+
+    return (await strapiFetch<Page[]>(url, []))[0] ?? null
 }

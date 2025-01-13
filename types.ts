@@ -31,7 +31,7 @@ export interface Post {
     tags: Tag[]
     categories: Category[]
     featuredImage: Image
-    author: Author
+    createdBy: Author
     slug: string
     publishedAt: string
     content: string
@@ -46,6 +46,18 @@ export interface ReadingPost {
     categories: Category[]
     featuredImage: Image
     author: Author
+    slug: string
+    publishedAt: string
+    content: string
+}
+
+export interface Page {
+    id: string
+    title: string
+    description: string
+    date: string
+    featuredImage: Image
+    createdBy: Author
     slug: string
     publishedAt: string
     content: string
