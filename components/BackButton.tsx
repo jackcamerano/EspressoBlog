@@ -7,7 +7,7 @@ type BackButtonProps = {
     href?: string
 }
 
-export function BackButton({ href = '/' }: BackButtonProps) {
+export const BackButton = ({ href = '/' }: BackButtonProps) => {
     return (
         <Button className="rounded-2xl" asChild aria-label="Go back">
             <Link href={href}>

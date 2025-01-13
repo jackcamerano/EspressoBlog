@@ -1,4 +1,4 @@
-export function Linkedin() {
+export const Linkedin = () => {
     return (
         <svg
             height="24px"

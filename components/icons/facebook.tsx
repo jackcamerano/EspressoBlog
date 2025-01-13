@@ -1,4 +1,4 @@
-export function Facebook() {
+export const Facebook = () => {
     return (
         <svg
             fill="currentColor"

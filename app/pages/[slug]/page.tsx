@@ -13,20 +13,16 @@ export const generateStaticParams = async () => {
     return await getAllPages()
 }
 
-export async function generateMetadata({
+export const generateMetadata = async ({
     params
 }: {
     params: Promise<{ slug: string }>
-}) {
+}) => {
     const { slug } = await params
 
     return { title: slug }
 }
-export default async function Page({
-    params
-}: {
-    params: Promise<{ slug: string }>
-}) {
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params
 
     const page = await getPage(slug)
@@ -64,3 +60,5 @@ export default async function Page({
         </>
     )
 }
+
+export default Page

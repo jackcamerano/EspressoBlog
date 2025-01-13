@@ -16,7 +16,7 @@ import { BackButton } from './BackButton'
 
 import type { Post } from '@/types'
 
-export function ReadHeader({ item }: { item: Post }) {
+export const ReadHeader = ({ item }: { item: Post }) => {
     const getDate = dayjs(item.publishedAt).format('DD MMM, YYYY')
     return (
         <Card className="mx-auto mt-12 flex max-w-6xl flex-col border-none shadow-none">

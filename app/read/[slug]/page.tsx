@@ -12,11 +12,11 @@ import { config } from '@/next.config'
 export const generateStaticParams = async () =>
     (await getAllPosts()).map(post => ({ slug: post.slug }))
 
-export async function generateMetadata({
+export const generateMetadata = async ({
     params
 }: {
     params: Promise<{ slug: string }>
-}) {
+}) => {
     const { slug } = await params
 
     const post = await getPost(slug)
@@ -28,11 +28,7 @@ export async function generateMetadata({
     return { title: post.title }
 }
 
-export default async function Page({
-    params
-}: {
-    params: Promise<{ slug: string }>
-}) {
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params
 
     const post = await getPost(slug)
@@ -78,3 +74,5 @@ export default async function Page({
         </>
     )
 }
+
+export default Page

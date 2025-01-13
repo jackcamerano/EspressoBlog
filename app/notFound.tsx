@@ -8,7 +8,7 @@ import {
     CardTitle
 } from '@/components/ui/card'
 
-export default function Notfound() {
+const Notfound = () => {
     return (
         <Card className="mt-16 border-none shadow-none">
             <CardContent className="mx-auto flex w-full flex-col items-center text-center">
@@ -25,3 +25,5 @@ export default function Notfound() {
         </Card>
     )
 }
+
+export default Notfound
