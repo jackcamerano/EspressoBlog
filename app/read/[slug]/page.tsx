@@ -51,7 +51,10 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
             {featuredImage && (
                 <FeaturedImage
-                    url={`${config.STRAPI_API_URL}${featuredImage.url}`}
+                    url={new URL(
+                        featuredImage.url,
+                        config.STRAPI_API_URL
+                    ).toString()}
                     alt={featuredImage.alternativeText ?? title}
                 />
             )}
