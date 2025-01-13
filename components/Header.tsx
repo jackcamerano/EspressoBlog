@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/navigation-menu'
 import { classNames } from '@/lib/utils'
 
-export function Header() {
+export const Header = () => {
     return (
         <header className="container mx-auto grid grid-cols-1 grid-rows-1 flex-wrap items-center justify-around gap-4 py-3 md:justify-between xl:grid-cols-6">
             <Button variant="link" className="stroke [&_svg]:size-8" asChild>

@@ -5,9 +5,9 @@ import tailwindcssAnimate from 'tailwindcss-animate'
 
 import type { Config } from 'tailwindcss/types/config'
 
-function flattenColors(
+const flattenColors = (
     colors: Record<string, string> | Record<string, unknown>
-): Record<string, string> {
+): Record<string, string> => {
     const result: Record<string, string> = {}
 
     for (const [key, value] of Object.entries(colors)) {

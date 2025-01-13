@@ -5,11 +5,11 @@ import { getCategories, getPostsByCategory } from '@/data'
 
 import type { Metadata } from 'next'
 
-export async function generateMetadata({
+export const generateMetadata = async ({
     params
 }: {
     params: Promise<{ slug: string }>
-}): Promise<Metadata> {
+}): Promise<Metadata> => {
     const { slug } = await params
 
     return {
@@ -17,15 +17,11 @@ export async function generateMetadata({
     }
 }
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
     return await getCategories()
 }
 
-export default async function Page({
-    params
-}: {
-    params: Promise<{ slug: string }>
-}) {
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params
 
     const posts = await getPostsByCategory(slug)
@@ -43,3 +39,5 @@ export default async function Page({
         />
     )
 }
+
+export default Page

@@ -9,7 +9,7 @@ import {
     PaginationPrevious
 } from '@/components/ui/pagination'
 
-export function Pagination() {
+export const Pagination = () => {
     return (
         <div className="mx-auto my-8 grid grid-cols-1 items-center gap-5 sm:grid-cols-2">
             <Label className="text-center text-sm">

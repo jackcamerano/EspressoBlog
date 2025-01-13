@@ -1,4 +1,4 @@
-export function Instagram() {
+export const Instagram = () => {
     return (
         <svg
             role="img"

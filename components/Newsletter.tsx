@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function Newsletter() {
+export const Newsletter = () => {
     return (
         <section>
             <div className="mx-auto my-16 w-full max-w-7xl bg-secondary px-5 py-16 md:px-10 md:py-20">

@@ -1,4 +1,4 @@
-export function Hero() {
+export const Hero = () => {
     return (
         <section className="relative overflow-hidden">
             <div className="relative">

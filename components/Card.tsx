@@ -14,7 +14,7 @@ import {
 import { config } from '@/next.config'
 import { Post } from '@/types'
 
-export function BlogCard({ item }: { item: Post }) {
+export const BlogCard = ({ item }: { item: Post }) => {
     const GetDate = dayjs(item.date).format('DD MMM, YYYY')
 
     return (

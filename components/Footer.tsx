@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Button } from '@/components/ui/button'
 
-function Footer() {
+const Footer = () => {
     return (
         <footer className="container mx-auto my-16 flex flex-col justify-center border-t-2 border-border p-6">
             <Button

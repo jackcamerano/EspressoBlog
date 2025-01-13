@@ -1,4 +1,4 @@
-export function Twitter() {
+export const Twitter = () => {
     return (
         <svg
             role="img"

@@ -1,4 +1,4 @@
-export function Github() {
+export const Github = () => {
     return (
         <svg
             role="img"

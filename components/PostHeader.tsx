@@ -16,7 +16,7 @@ import { BackButton } from './BackButton'
 
 import type { Post } from '@/types'
 
-export function ReadHeader({ item }: { item: Post }) {
+export const ReadHeader = ({ item }: { item: Post }) => {
     const getDate = dayjs(item.publishedAt).format('DD MMM, YYYY')
     return (
         <Card className="mx-auto mt-12 flex max-w-6xl flex-col border-none shadow-none">
@@ -24,7 +24,7 @@ export function ReadHeader({ item }: { item: Post }) {
                 <div className="mb-3 flex flex-row items-center text-center">
                     <BackButton />
                     <Label className="mx-2 text-left font-bold">
-                        Published by {item.author.firstname}
+                        Published by {item.createdBy.firstname}
                     </Label>
                     <Label className="mr-2 text-left font-bold">
                         on {getDate}

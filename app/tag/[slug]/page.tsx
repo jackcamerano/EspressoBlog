@@ -5,25 +5,21 @@ import { getPostsByTag, GetTags } from '@/data'
 
 import type { Metadata } from 'next'
 
-export async function generateMetadata({
+export const generateMetadata = async ({
     params
 }: {
     params: Promise<{ slug: string }>
-}): Promise<Metadata> {
+}): Promise<Metadata> => {
     const { slug } = await params
 
     return { title: `Articles Related to ${slug?.trim().replaceAll(' ', '-')}` }
 }
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
     return GetTags()
 }
 
-export default async function Page({
-    params
-}: {
-    params: Promise<{ slug: string }>
-}) {
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params
 
     const posts = await getPostsByTag(slug)
@@ -41,3 +37,5 @@ export default async function Page({
         />
     )
 }
+
+export default Page
