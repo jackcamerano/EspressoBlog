@@ -24,7 +24,7 @@ export function ReadHeader({ item }: { item: Post }) {
                 <div className="mb-3 flex flex-row items-center text-center">
                     <BackButton />
                     <Label className="mx-2 text-left font-bold">
-                        Published by {item.author.firstname}
+                        Published by {item.createdBy.firstname}
                     </Label>
                     <Label className="mr-2 text-left font-bold">
                         on {getDate}

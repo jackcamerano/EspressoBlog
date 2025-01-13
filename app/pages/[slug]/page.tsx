@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
 import { AsteriskFooter } from '@/components/AsteriskFooter'
+import { FeaturedImage } from '@/components/FeaturedImage'
 import { Newsletter } from '@/components/Newsletter'
 import { PageHeader } from '@/components/PageHeader'
 import { getAllPages, getPage } from '@/data'
@@ -44,18 +44,10 @@ export default async function Page({
             <PageHeader item={page} />
 
             {featuredImage && (
-                <div className="relative my-10 aspect-[4/3] overflow-hidden">
-                    <Image
-                        src={new URL(
-                            featuredImage.url,
-                            config.STRAPI_API_URL
-                        ).toString()}
-                        alt={featuredImage.alternativeText ?? title}
-                        className="object-cover"
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                </div>
+                <FeaturedImage
+                    url={`${config.STRAPI_API_URL}${featuredImage.url}`}
+                    alt={featuredImage.alternativeText ?? title}
+                />
             )}
 
             <article className="container prose mx-auto max-w-6xl px-6 dark:prose-invert lg:prose-xl">
