@@ -10,17 +10,19 @@ import {
     Linkedin,
     Logo
 } from '@/components/icons'
+import NavigationMenu from '@/components/organisms/NavigationMenu'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
 import { Button } from '@/components/ui/button'
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList
-} from '@/components/ui/navigation-menu'
-import { classNames } from '@/lib/utils'
 
 export const Header = () => {
+    const menuItems = [
+        { href: '/', label: 'Home' },
+        { href: '/tag/programming', label: 'Programming' },
+        { href: '/tag/photography', label: 'Photography' },
+        { href: '/tag/smart-phone', label: 'Smart Phone' },
+        { href: '/pages/about', label: 'About' }
+    ]
+
     return (
         <header className="container mx-auto grid grid-cols-1 grid-rows-1 flex-wrap items-center justify-around gap-4 py-3 md:justify-between xl:grid-cols-6">
             <Button variant="link" className="stroke [&_svg]:size-8" asChild>
@@ -34,46 +36,10 @@ export const Header = () => {
                 </Link>
             </Button>
 
-            <NavigationMenu className="mx-auto w-full xl:col-span-3">
-                <NavigationMenuList className="flex flex-wrap">
-                    <NavigationMenuItem>
-                        <Link href="/" className="text-background">
-                            <Button variant="link">Home</Button>
-                        </Link>
-                    </NavigationMenuItem>
-
-                    <NavigationMenuItem>
-                        <Link
-                            href="/tag/programming"
-                            className="text-background"
-                        >
-                            <Button variant="link">Programming</Button>
-                        </Link>
-                    </NavigationMenuItem>
-
-                    <NavigationMenuItem>
-                        <Link
-                            href="/tag/photography"
-                            className="text-background"
-                        >
-                            <Button variant="link">Photography</Button>
-                        </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <Link
-                            href="/tag/smart-phone"
-                            className="text-background"
-                        >
-                            <Button variant="link">Smart Phone</Button>
-                        </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <Link href="/pages/about" className="text-background">
-                            <Button variant="link">About</Button>
-                        </Link>
-                    </NavigationMenuItem>
-                </NavigationMenuList>
-            </NavigationMenu>
+            <NavigationMenu
+                className="mx-auto w-full xl:col-span-3"
+                menuItems={menuItems}
+            />
 
             <div className="mx-auto flex flex-row flex-wrap gap-4 xl:col-span-2 xl:col-start-5 xl:gap-2">
                 <Button variant="link" asChild>
@@ -106,31 +72,3 @@ export const Header = () => {
         </header>
     )
 }
-
-const ListItem = React.forwardRef<
-    React.ElementRef<'a'>,
-    React.ComponentPropsWithoutRef<'a'>
->(({ className, title, children, ...props }, ref) => {
-    return (
-        <li>
-            <NavigationMenuLink asChild>
-                <a
-                    ref={ref}
-                    className={classNames(
-                        'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-                        className
-                    )}
-                    {...props}
-                >
-                    <div className="text-sm font-medium leading-none">
-                        {title}
-                    </div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                        {children}
-                    </p>
-                </a>
-            </NavigationMenuLink>
-        </li>
-    )
-})
-ListItem.displayName = 'ListItem'
