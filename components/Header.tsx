@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import * as React from 'react'
 
+import { Button } from '@/components/atoms/Button'
 import {
     Facebook,
     Instagram,
@@ -12,7 +13,6 @@ import {
 } from '@/components/icons'
 import NavigationMenu from '@/components/organisms/NavigationMenu'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
-import { Button } from '@/components/ui/button'
 
 export const Header = () => {
     const menuItems = [

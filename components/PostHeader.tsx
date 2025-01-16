@@ -3,7 +3,7 @@ import { Tag } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/atoms/Button'
 import {
     Card,
     CardTitle,

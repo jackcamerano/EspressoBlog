@@ -1,7 +1,7 @@
 import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 
-import { Button } from './ui/button'
+import { Button } from './atoms/Button'
 
 type BackButtonProps = {
     href?: string
