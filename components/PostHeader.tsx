@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 
-import { BackButton } from './BackButton'
+import { BackButton } from './molecules/BackButton'
 
 import type { Post } from '@/types'
 

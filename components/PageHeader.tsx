@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Card, CardTitle, CardContent } from '@/components/ui/card'
 
-import { BackButton } from './BackButton'
+import { BackButton } from './molecules/BackButton'
 
 import type { Page } from '@/types'
 
