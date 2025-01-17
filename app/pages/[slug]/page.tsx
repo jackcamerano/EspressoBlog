@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import { FeaturedImage } from '@/components/FeaturedImage'
+import { FeaturedImage } from '@/components/atoms/FeaturedImage'
 import { AsteriskFooter } from '@/components/molecules/AsteriskFooter'
 import { Newsletter } from '@/components/Newsletter'
 import { PageHeader } from '@/components/organisms/PageHeader'
