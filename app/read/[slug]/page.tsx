@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 
 import { FeaturedImage } from '@/components/atoms/FeaturedImage'
 import { AsteriskFooter } from '@/components/molecules/AsteriskFooter'
-import { Newsletter } from '@/components/Newsletter'
+import { Newsletter } from '@/components/organisms/Newsletter'
 import { PostArchives } from '@/components/organisms/PostArchives'
 import { PostHeader } from '@/components/organisms/PostHeader'
 import { getAllPosts, getPost, getRelatedPosts } from '@/data'

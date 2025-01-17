@@ -1,4 +1,10 @@
-export const Hero = () => {
+export const Hero = ({
+    title,
+    description
+}: {
+    title: string
+    description: string
+}) => {
     return (
         <section className="relative overflow-hidden">
             <div className="relative">
@@ -7,7 +13,7 @@ export const Hero = () => {
                         <div className="flex flex-col items-start text-left">
                             <div className="max-w-lg">
                                 <h1 className="my-6 text-pretty text-6xl font-bold lg:text-6xl">
-                                    Welcome to Blogify Theme
+                                    {title}
                                 </h1>
                             </div>
                         </div>
@@ -15,11 +21,7 @@ export const Hero = () => {
                     <div>
                         <div className="flex flex-col gap-16 pb-8 pt-12 md:py-32">
                             <p className="my-6 text-pretty text-xl font-bold lg:text-2xl">
-                                Blogify is a modern nextjs, typescript, and
-                                tailwind css based theme featuring captivating
-                                page transitions, a unique custom cursor, and a
-                                sleek scrollbar, all enhanced with smooth
-                                scrolling.
+                                {description}
                             </p>
                         </div>
                     </div>
