@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 import { Hero } from '@/components/Hero'
 import { Newsletter } from '@/components/Newsletter'
-import { PostArchives } from '@/components/PostArchive'
+import { PostArchives } from '@/components/organisms/PostArchives'
 import { getAllPosts } from '@/data'
 
 import { Pagination } from '../components/Pagination'

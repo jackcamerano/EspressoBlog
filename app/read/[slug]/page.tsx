@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation'
 import { AsteriskFooter } from '@/components/AsteriskFooter'
 import { FeaturedImage } from '@/components/FeaturedImage'
 import { Newsletter } from '@/components/Newsletter'
-import { PostArchives } from '@/components/PostArchive'
-import { ReadHeader } from '@/components/PostHeader'
+import { PostArchives } from '@/components/organisms/PostArchives'
+import { PostHeader } from '@/components/organisms/PostHeader'
 import { getAllPosts, getPost, getRelatedPosts } from '@/data'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
 import { config } from '@/next.config'
@@ -47,7 +47,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
     return (
         <>
-            {post && <ReadHeader item={post} />}
+            {post && <PostHeader item={post} />}
 
             {featuredImage && (
                 <FeaturedImage
