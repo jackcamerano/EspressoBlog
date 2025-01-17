@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import { AsteriskFooter } from '@/components/AsteriskFooter'
 import { FeaturedImage } from '@/components/FeaturedImage'
+import { AsteriskFooter } from '@/components/molecules/AsteriskFooter'
 import { Newsletter } from '@/components/Newsletter'
 import { PageHeader } from '@/components/organisms/PageHeader'
 import { getAllPages, getPage } from '@/data'

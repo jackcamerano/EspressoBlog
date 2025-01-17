@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 
-import { AsteriskFooter } from '@/components/AsteriskFooter'
 import { FeaturedImage } from '@/components/FeaturedImage'
+import { AsteriskFooter } from '@/components/molecules/AsteriskFooter'
 import { Newsletter } from '@/components/Newsletter'
 import { PostArchives } from '@/components/organisms/PostArchives'
 import { PostHeader } from '@/components/organisms/PostHeader'
