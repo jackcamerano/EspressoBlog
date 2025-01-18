@@ -8,9 +8,14 @@ type ReadMoreLinkProps = {
 }
 
 export const ReadMoreLink = ({ href = '/' }: ReadMoreLinkProps) => (
-    <Button variant="link" className="text-md !mx-0 mt-3 !px-0" asChild>
+    <Button
+        variant="link"
+        className="text-md !mx-0 mt-3 !px-0"
+        asChild
+        aria-label={`Read more about ${href}`}
+    >
         <Link href={href}>
-            <ChevronRight /> Read More{' '}
+            <ChevronRight /> Read More
         </Link>
     </Button>
 )

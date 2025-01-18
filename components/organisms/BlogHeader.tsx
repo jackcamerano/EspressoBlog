@@ -6,6 +6,15 @@ import { TagList } from '@/components/molecules/TagList'
 
 import type { Category, Tag } from '@/types'
 
+interface BlogHeaderProps {
+    title: string
+    description?: string
+    author?: string
+    date?: string
+    categories?: Category[]
+    tags?: Tag[]
+}
+
 export const BlogHeader = ({
     title,
     description = '',
@@ -13,14 +22,7 @@ export const BlogHeader = ({
     date = '',
     categories = [],
     tags = []
-}: {
-    title: string
-    description?: string
-    author?: string
-    date?: string
-    categories?: Category[]
-    tags?: Tag[]
-}) => {
+}: BlogHeaderProps) => {
     return (
         <header className="mx-auto mt-12 flex max-w-6xl flex-col border-none shadow-none">
             <div className="mb-3 flex items-center">
@@ -32,9 +34,7 @@ export const BlogHeader = ({
                 )}
                 {date && <span className="mr-2 font-bold">on {date}</span>}
 
-                {categories?.length > 0 && (
-                    <CategoryList categories={categories} />
-                )}
+                <CategoryList categories={categories} />
             </div>
 
             <BlogTitle className="text-3xl font-extrabold lg:text-6xl">
@@ -45,9 +45,7 @@ export const BlogHeader = ({
             </BlogDescription>
 
             <div className="mt-4 flex items-center">
-                {tags?.length > 0 && (
-                    <TagList title="We talk about:" tags={tags} />
-                )}
+                <TagList title="We talk about:" tags={tags} />
             </div>
         </header>
     )

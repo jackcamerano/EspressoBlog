@@ -1,12 +1,11 @@
-export const Hero = ({
-    title,
-    description
-}: {
+interface HeroProps {
     title: string
     description: string
-}) => {
+}
+
+export const Hero = ({ title, description }: HeroProps) => {
     return (
-        <section className="relative overflow-hidden">
+        <section className="relative overflow-hidden" aria-label="Hero section">
             <div className="relative">
                 <div className="md:-space-x-26 container relative flex flex-col items-start md:flex-row md:items-center">
                     <div className="z-20 shrink-0 pt-32 md:w-1/2 md:pb-32">

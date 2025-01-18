@@ -43,30 +43,30 @@ export const Header = () => {
 
             <div className="mx-auto flex flex-row flex-wrap gap-4 xl:col-span-2 xl:col-start-5 xl:gap-2">
                 <Button variant="link" asChild>
-                    <Link href={'#'}>
+                    <Link href={'#'} aria-label="Visit our Facebook page">
                         <Facebook />
                     </Link>
                 </Button>
 
                 <Button variant="link" asChild>
-                    <Link href={'#'}>
+                    <Link href={'#'} aria-label="Visit our Instagram profile">
                         <Instagram />
                     </Link>
                 </Button>
 
                 <Button variant="link" asChild>
-                    <Link href={'https://x.com/FrontendWeb3'}>
+                    <Link href={'#'} aria-label="Visit our Twitter page">
                         <Twitter />
                     </Link>
                 </Button>
 
                 <Button variant="link" asChild>
-                    <Link href={'https://www.linkedin.com/company/frontendweb'}>
+                    <Link href={'#'} aria-label="Visit our LInkedin page">
                         <Linkedin />
                     </Link>
                 </Button>
 
-                <Button className="rounded-2xl"> Subscrible </Button>
+                <Button className="rounded-2xl">Subscribe</Button>
                 <ThemeToggle />
             </div>
         </header>

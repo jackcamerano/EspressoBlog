@@ -7,7 +7,7 @@ import { Newsletter } from '@/components/organisms/Newsletter'
 import { PageHeader } from '@/components/organisms/PageHeader'
 import { getAllPages, getPage } from '@/data'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
-import { config } from '@/next.config'
+import { getImageUrl } from '@/lib/utils'
 
 export const generateStaticParams = async () => {
     return await getAllPages()
@@ -41,10 +41,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
             {featuredImage && (
                 <FeaturedImage
-                    url={new URL(
-                        featuredImage.url,
-                        config.STRAPI_API_URL
-                    ).toString()}
+                    url={getImageUrl(featuredImage.url)}
                     alt={featuredImage.alternativeText ?? title}
                 />
             )}

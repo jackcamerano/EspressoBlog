@@ -18,6 +18,11 @@ const NavigationMenuViewport = () => (
     </div>
 )
 
+type MenuItem = {
+    href: string
+    label: string
+}
+
 const NavigationMenuItems = ({ items }: { items: MenuItem[] }) => (
     <>
         {items.map(({ href, label }) => (
@@ -40,6 +45,7 @@ const NavigationMenu = React.forwardRef<
             'relative z-10 flex max-w-max items-center justify-center',
             className
         )}
+        aria-label="Main navigation"
         {...props}
     >
         <List className="group flex flex-1 list-none items-center justify-center space-x-4">
@@ -52,8 +58,3 @@ const NavigationMenu = React.forwardRef<
 NavigationMenu.displayName = 'NavigationMenu'
 
 export default NavigationMenu
-
-type MenuItem = {
-    href: string
-    label: string
-}
