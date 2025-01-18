@@ -1,7 +1,7 @@
 import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 
-import { Button } from './ui/button'
+import { Button } from '../atoms/Button'
 
 type BackButtonProps = {
     href?: string
@@ -9,7 +9,12 @@ type BackButtonProps = {
 
 export const BackButton = ({ href = '/' }: BackButtonProps) => {
     return (
-        <Button className="rounded-2xl" asChild aria-label="Go back">
+        <Button
+            className="rounded-2xl"
+            asChild
+            aria-label="Go back"
+            role="navigation"
+        >
             <Link href={href}>
                 <ChevronLeft /> Back
             </Link>

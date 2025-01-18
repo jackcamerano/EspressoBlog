@@ -1,13 +1,11 @@
 import { notFound } from 'next/navigation'
 
-import { AsteriskFooter } from '@/components/AsteriskFooter'
-import { FeaturedImage } from '@/components/FeaturedImage'
-import { Newsletter } from '@/components/Newsletter'
-import { PostArchives } from '@/components/PostArchive'
-import { ReadHeader } from '@/components/PostHeader'
+import { FeaturedImage } from '@/components/atoms/FeaturedImage'
+import { PostArchives } from '@/components/organisms/PostArchives'
+import { PostHeader } from '@/components/organisms/PostHeader'
 import { getAllPosts, getPost, getRelatedPosts } from '@/data'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
-import { config } from '@/next.config'
+import { getImageUrl } from '@/lib/utils'
 
 export const generateStaticParams = async () =>
     (await getAllPosts()).map(post => ({ slug: post.slug }))
@@ -47,14 +45,11 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
     return (
         <>
-            {post && <ReadHeader item={post} />}
+            {post && <PostHeader item={post} />}
 
             {featuredImage && (
                 <FeaturedImage
-                    url={new URL(
-                        featuredImage.url,
-                        config.STRAPI_API_URL
-                    ).toString()}
+                    url={getImageUrl(featuredImage.url)}
                     alt={featuredImage.alternativeText ?? title}
                 />
             )}
@@ -66,10 +61,6 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                     />
                 )}
             </article>
-
-            <AsteriskFooter />
-
-            <Newsletter />
 
             {relatedPosts.length !== 0 && (
                 <PostArchives title="Related posts" posts={relatedPosts} />

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import { PostArchives } from '@/components/PostArchive'
+import { PostArchives } from '@/components/organisms/PostArchives'
 import { getCategories, getPostsByCategory } from '@/data'
 
 import type { Metadata } from 'next'

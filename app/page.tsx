@@ -1,11 +1,10 @@
 import { Metadata } from 'next'
 
-import { Hero } from '@/components/Hero'
-import { Newsletter } from '@/components/Newsletter'
-import { PostArchives } from '@/components/PostArchive'
+import { Hero } from '@/components/organisms/Hero'
+import { PostArchives } from '@/components/organisms/PostArchives'
 import { getAllPosts } from '@/data'
 
-import { Pagination } from '../components/Pagination'
+import { Pagination } from '../components/organisms/Pagination'
 
 export const metadata: Metadata = {
     title: 'Home | Blogify',
@@ -13,18 +12,23 @@ export const metadata: Metadata = {
         'Blogify is an open-source nextjs blog template design with tailwind CSS.'
 }
 
+const HERO_TITLE = 'Welcome to Blogify Theme'
+const HERO_DESCRIPTION = `
+    Blogify is a modern nextjs, typescript, and tailwind css based theme 
+    featuring captivating page transitions, a unique custom cursor, and a
+    sleek scrollbar, all enhanced with smooth scrolling.`.trim()
+
 const Page = async () => {
     const posts = await getAllPosts()
     return (
         <>
-            <Hero />
+            <Hero title={HERO_TITLE} description={HERO_DESCRIPTION} />
+
             <main className="container mx-auto flex flex-col p-3">
                 <PostArchives title="All posts" posts={posts} />
 
                 <Pagination />
             </main>
-
-            <Newsletter />
         </>
     )
 }
