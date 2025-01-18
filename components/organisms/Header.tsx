@@ -8,9 +8,9 @@ import {
     Facebook,
     Instagram,
     Twitter,
-    Linkedin,
-    Logo
-} from '@/components/icons'
+    Linkedin
+} from '@/components/atoms/Icons'
+import { Logo } from '@/components/atoms/Logo'
 import NavigationMenu from '@/components/organisms/NavigationMenu'
 import { ThemeToggle } from '@/components/organisms/ThemeToggle'
 
