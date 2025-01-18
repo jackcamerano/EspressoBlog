@@ -3,7 +3,7 @@ import { config } from '@/next.config'
 import type { Category, Page, Post, Tag } from '@/types'
 
 const token = config.STRAPI_API_TOKEN
-const baseUrl = config.STRAPI_API_URL
+const baseUrl = config.NEXT_PUBLIC_STRAPI_API_URL
 
 interface StrapiResponse<T> {
     data?: T
