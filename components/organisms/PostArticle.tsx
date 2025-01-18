@@ -1,9 +1,8 @@
-import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import { getImageUrl } from '@/lib/utils'
+import { formatDate, getImageUrl } from '@/lib/utils'
 import { Post } from '@/types'
 
 import BlogDescription from '../atoms/Blog/BlogDescription'
@@ -11,8 +10,6 @@ import BlogTitle from '../atoms/Blog/BlogTitle'
 import { CategoryList } from '../molecules/CategoryList'
 import { ReadMoreLink } from '../molecules/ReadMoreLink'
 import { TagList } from '../molecules/TagList'
-
-const DATE_FORMAT = 'DD MMM, YYYY'
 
 interface PostArticleProps {
     post: Post
@@ -28,14 +25,10 @@ export const PostArticle = ({ post }: PostArticleProps) => {
         slug
     } = post
 
-    const date = React.useMemo(() => {
-        try {
-            return dayjs(post.date).format(DATE_FORMAT)
-        } catch (error) {
-            console.error('Failed to parse date:', error)
-            return 'Date unavailable'
-        }
-    }, [post.date])
+    const date = React.useMemo(
+        () => formatDate(post.publishedAt),
+        [post.publishedAt]
+    )
 
     return (
         <article className="overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow">

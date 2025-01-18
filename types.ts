@@ -27,7 +27,6 @@ export interface Post {
     id: string
     title: string
     description: string
-    date: string
     tags: Tag[]
     categories: Category[]
     featuredImage: Image
@@ -41,7 +40,6 @@ export interface Page {
     id: string
     title: string
     description: string
-    date: string
     featuredImage: Image
     createdBy: Author
     slug: string
