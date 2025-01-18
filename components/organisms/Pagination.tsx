@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import React from 'react'
 
 import { buttonVariants } from '@/components/atoms/Button'
-import { Label } from '@/components/ui/label'
+import { Label } from '@/components/atoms/Label'
 import { classNames } from '@/lib/utils'
 
 type PaginationLinkProps = {
