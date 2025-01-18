@@ -9,7 +9,7 @@ interface CategoryListProps {
 }
 
 export const CategoryList = memo(({ categories }: CategoryListProps) => {
-    if (!categories?.length) {
+    if (!categories || categories.length === 0) {
         return null
     }
 

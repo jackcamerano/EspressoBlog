@@ -9,6 +9,7 @@ type PaginationLinkProps = {
     isActive?: boolean
     variant?: 'previous' | 'next'
     size?: 'default' | 'icon'
+    'aria-disabled'?: boolean
 } & React.ComponentProps<'a'>
 
 const PaginationLink = ({

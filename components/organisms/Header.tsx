@@ -11,7 +11,7 @@ import {
     Linkedin
 } from '@/components/atoms/Icons'
 import { Logo } from '@/components/atoms/Logo'
-import NavigationMenu from '@/components/organisms/NavigationMenu'
+import NavigationMenu from '@/components/molecules/Navigation/NavigationMenu'
 import { ThemeToggle } from '@/components/organisms/ThemeToggle'
 
 export const Header = () => {
@@ -27,12 +27,10 @@ export const Header = () => {
         <header className="container mx-auto grid grid-cols-1 grid-rows-1 flex-wrap items-center justify-around gap-4 py-3 md:justify-between xl:grid-cols-6">
             <Button variant="link" className="stroke [&_svg]:size-8" asChild>
                 <Link href="/" className="flex items-center">
-                    <>
-                        <Logo />{' '}
-                        <span className="self-center whitespace-nowrap text-2xl font-semibold">
-                            Blogify
-                        </span>
-                    </>
+                    <Logo />
+                    <span className="self-center whitespace-nowrap text-2xl font-semibold">
+                        Blogify
+                    </span>
                 </Link>
             </Button>
 
@@ -61,7 +59,7 @@ export const Header = () => {
                 </Button>
 
                 <Button variant="link" asChild>
-                    <Link href={'#'} aria-label="Visit our LInkedin page">
+                    <Link href={'#'} aria-label="Visit our LinkedIn page">
                         <Linkedin />
                     </Link>
                 </Button>

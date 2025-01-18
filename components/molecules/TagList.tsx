@@ -6,16 +6,16 @@ import { Button } from '@/components/atoms/Button'
 import { Tag as TagType } from '@/types'
 
 interface TagListProps {
-    title: string
-    tags: TagType[]
+    title?: string
+    tags?: TagType[]
 }
 
-export const TagList = memo(({ title = '', tags }: TagListProps) => {
-    if (!tags?.length) {
+export const TagList = memo(({ title = '', tags = [] }: TagListProps) => {
+    if (!tags || tags.length === 0) {
         return null
     }
     return (
-        <div>
+        <section aria-label="Post tags">
             {title}
             <div className="flex flex-wrap gap-2">
                 {tags.map(tag => (
@@ -31,7 +31,7 @@ export const TagList = memo(({ title = '', tags }: TagListProps) => {
                     </Button>
                 ))}
             </div>
-        </div>
+        </section>
     )
 })
 

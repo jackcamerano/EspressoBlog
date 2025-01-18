@@ -1,11 +1,14 @@
 import React from 'react'
 
+import { BlogHeader } from '@/components/organisms/BlogHeader'
 import { formatDate } from '@/lib/utils'
 import { Post } from '@/types'
 
-import { BlogHeader } from './BlogHeader'
+type PostHeaderProps = {
+    item: Post
+}
 
-export const PostHeader = ({ item }: { item: Post }) => {
+export const PostHeader = ({ item }: PostHeaderProps) => {
     const { title, description, categories, tags } = item
     const author = item.createdBy.firstname ?? ''
 
@@ -22,6 +25,6 @@ export const PostHeader = ({ item }: { item: Post }) => {
             date={date}
             categories={categories}
             tags={tags}
-        ></BlogHeader>
+        />
     )
 }

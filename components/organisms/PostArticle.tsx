@@ -42,7 +42,12 @@ export const PostArticle = ({ post }: PostArticleProps) => {
                     </div>
 
                     <BlogTitle className="text-xl font-bold">
-                        <Link href={`/read/${slug}`}>{title}</Link>
+                        <Link
+                            href={`/read/${slug}`}
+                            aria-label={`View full article: ${title}`}
+                        >
+                            {title}
+                        </Link>
                     </BlogTitle>
 
                     <BlogDescription>{description}</BlogDescription>
@@ -54,7 +59,10 @@ export const PostArticle = ({ post }: PostArticleProps) => {
 
                 <div className="relative order-1 aspect-[6/5] overflow-hidden rounded-lg md:aspect-[6/3] lg:order-2">
                     {image && (
-                        <Link href={`/read/${slug}`}>
+                        <Link
+                            href={`/read/${slug}`}
+                            aria-label={`View full article: ${title}`}
+                        >
                             <Image
                                 src={getImageUrl(image.url)}
                                 alt={image.alternativeText ?? title}

@@ -6,8 +6,36 @@ import {
     FaGithub
 } from 'react-icons/fa'
 
-export const Facebook = () => <FaFacebook size={24} color="currentColor" />
-export const Instagram = () => <FaInstagram size={24} color="currentColor" />
-export const Linkedin = () => <FaLinkedin size={24} color="currentColor" />
-export const Twitter = () => <FaTwitter size={24} color="currentColor" />
-export const Github = () => <FaGithub size={24} color="currentColor" />
+import type { IconType } from 'react-icons'
+
+interface IconProps {
+    size?: number
+    color?: string
+    title?: string
+    icon: IconType
+}
+
+export const Icon = ({
+    size = 24,
+    color = 'currentColor',
+    title,
+    icon: IconComponent
+}: IconProps) => (
+    <IconComponent size={size} color={color} aria-label={title} role="img" />
+)
+
+export const Facebook = (props: Omit<IconProps, 'icon'>) => (
+    <Icon icon={FaFacebook} title="Facebook" {...props} />
+)
+export const Instagram = (props: Omit<IconProps, 'icon'>) => (
+    <Icon icon={FaInstagram} title="Instagram" {...props} />
+)
+export const Linkedin = (props: Omit<IconProps, 'icon'>) => (
+    <Icon icon={FaLinkedin} title="LinkedIn" {...props} />
+)
+export const Twitter = (props: Omit<IconProps, 'icon'>) => (
+    <Icon icon={FaTwitter} title="Twitter" {...props} />
+)
+export const Github = (props: Omit<IconProps, 'icon'>) => (
+    <Icon icon={FaGithub} title="GitHub" {...props} />
+)

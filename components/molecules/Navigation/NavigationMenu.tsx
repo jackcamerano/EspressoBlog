@@ -23,17 +23,22 @@ type MenuItem = {
     label: string
 }
 
-const NavigationMenuItems = ({ items }: { items: MenuItem[] }) => (
-    <>
-        {items.map(({ href, label }) => (
-            <Item key={href}>
-                <Link href={href} className={navigationMenuLinkClasses}>
-                    {label}
-                </Link>
-            </Item>
-        ))}
-    </>
+const NavigationMenuItems = React.memo(
+    ({ items }: { items: MenuItem[] }) => (
+        <>
+            {items.map(({ href, label }) => (
+                <Item key={href}>
+                    <Link href={href} className={navigationMenuLinkClasses}>
+                        {label}
+                    </Link>
+                </Item>
+            ))}
+        </>
+    ),
+    (prevProps, nextProps) => prevProps.items === nextProps.items
 )
+
+NavigationMenuItems.displayName = 'NavigationMenuItems'
 
 const NavigationMenu = React.forwardRef<
     React.ElementRef<typeof Root>,

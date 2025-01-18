@@ -6,8 +6,16 @@ export const classNames = (...inputs: ClassValue[]) => {
     return twMerge(clsx(inputs))
 }
 
-export const getImageUrl = (url: string) =>
-    new URL(url, process.env.NEXT_PUBLIC_STRAPI_API_URL).toString()
+export const getImageUrl = (url: string) => {
+    if (!url) return ''
+    try {
+        const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL
+        return new URL(url, baseUrl).toString()
+    } catch (error) {
+        console.error('Failed to construct image URL:', error)
+        return ''
+    }
+}
 
 const DATE_FORMAT = 'DD MMM, YYYY'
 
@@ -15,7 +23,6 @@ export const formatDate = (
     date: string | Date | undefined,
     fallback: string = 'Date unavailable'
 ): string => {
-    console.log(date)
     if (!date) {
         return fallback
     }
