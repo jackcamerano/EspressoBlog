@@ -2,8 +2,6 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 
 import { FeaturedImage } from '@/components/atoms/FeaturedImage'
-import { AsteriskFooter } from '@/components/molecules/AsteriskFooter'
-import { Newsletter } from '@/components/organisms/Newsletter'
 import { PageHeader } from '@/components/organisms/PageHeader'
 import { getAllPages, getPage } from '@/data'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
@@ -53,10 +51,6 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                     />
                 )}
             </article>
-
-            <AsteriskFooter />
-
-            <Newsletter />
         </>
     )
 }

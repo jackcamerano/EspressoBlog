@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
 
 import { Hero } from '@/components/organisms/Hero'
-import { Newsletter } from '@/components/organisms/Newsletter'
 import { PostArchives } from '@/components/organisms/PostArchives'
 import { getAllPosts } from '@/data'
 
@@ -30,8 +29,6 @@ const Page = async () => {
 
                 <Pagination />
             </main>
-
-            <Newsletter />
         </>
     )
 }
