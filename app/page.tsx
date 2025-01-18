@@ -5,7 +5,7 @@ import { Newsletter } from '@/components/organisms/Newsletter'
 import { PostArchives } from '@/components/organisms/PostArchives'
 import { getAllPosts } from '@/data'
 
-import { Pagination } from '../components/Pagination'
+import { Pagination } from '../components/organisms/Pagination'
 
 export const metadata: Metadata = {
     title: 'Home | Blogify',
