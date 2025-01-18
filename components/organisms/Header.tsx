@@ -12,7 +12,7 @@ import {
     Logo
 } from '@/components/icons'
 import NavigationMenu from '@/components/organisms/NavigationMenu'
-import { ThemeToggle } from '@/components/theme/theme-toggle'
+import { ThemeToggle } from '@/components/organisms/ThemeToggle'
 
 export const Header = () => {
     const menuItems = [
