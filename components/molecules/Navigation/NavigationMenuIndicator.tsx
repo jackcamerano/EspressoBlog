@@ -3,10 +3,11 @@ import React from 'react'
 
 import { classNames } from '@/lib/utils'
 
-const INDICATOR_ANIMATION_CLASSES =
-    'top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden ' +
-    'data-[state=visible]:animate-in data-[state=hidden]:animate-out ' +
-    'data-[state=hidden]:fade-out data-[state=visible]:fade-in'
+const INDICATOR_ANIMATION_CLASSES = `
+    top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden
+    data-[state=visible]:animate-in data-[state=hidden]:animate-out
+    data-[state=hidden]:fade-out data-[state=visible]:fade-in
+`.trim()
 
 export const NavigationMenuIndicator = React.forwardRef<
     React.ElementRef<typeof Indicator>,

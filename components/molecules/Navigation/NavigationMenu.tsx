@@ -23,20 +23,17 @@ type MenuItem = {
     label: string
 }
 
-const NavigationMenuItems = React.memo(
-    ({ items }: { items: MenuItem[] }) => (
-        <>
-            {items.map(({ href, label }) => (
-                <Item key={href}>
-                    <Link href={href} className={navigationMenuLinkClasses}>
-                        {label}
-                    </Link>
-                </Item>
-            ))}
-        </>
-    ),
-    (prevProps, nextProps) => prevProps.items === nextProps.items
-)
+const NavigationMenuItems = React.memo(({ items }: { items: MenuItem[] }) => (
+    <>
+        {items.map(({ href, label }) => (
+            <Item key={href}>
+                <Link href={href} className={navigationMenuLinkClasses}>
+                    {label}
+                </Link>
+            </Item>
+        ))}
+    </>
+))
 
 NavigationMenuItems.displayName = 'NavigationMenuItems'
 

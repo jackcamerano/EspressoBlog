@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 }
 
 const HERO_TITLE = 'Welcome to Blogify Theme'
-const HERO_DESCRIPTION =
-    'Blogify is a modern nextjs, typescript, and tailwind css based theme ' +
-    'featuring captivating page transitions, a unique custom cursor, and a ' +
-    'sleek scrollbar, all enhanced with smooth scrolling.'
+const HERO_DESCRIPTION = `
+    Blogify is a modern nextjs, typescript, and tailwind css based theme 
+    featuring captivating page transitions, a unique custom cursor, and a
+    sleek scrollbar, all enhanced with smooth scrolling.`.trim()
 
 const Page = async () => {
     const posts = await getAllPosts()
