@@ -1,8 +1,8 @@
 import localFont from 'next/font/local'
 
+import { ThemeProvider } from '@/components/context/ThemeProvider'
 import Footer from '@/components/organisms/Footer'
 import { Header } from '@/components/organisms/Header'
-import { ThemeProvider } from '@/components/theme/theme-provider'
 
 import type { Metadata } from 'next'
 import './globals.css'
