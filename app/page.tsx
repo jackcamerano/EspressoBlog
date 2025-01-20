@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 import { Hero } from '@/components/organisms/Hero'
 import { PostArchives } from '@/components/organisms/PostArchives'
-import { getAllPosts } from '@/data'
+import { client } from '@/lib/clients'
 
 import { Pagination } from '../components/organisms/Pagination'
 
@@ -19,7 +19,8 @@ const HERO_DESCRIPTION = `
     sleek scrollbar, all enhanced with smooth scrolling.`.trim()
 
 const Page = async () => {
-    const posts = await getAllPosts()
+    const posts = await client.getAllPosts()
+
     return (
         <>
             <Hero title={HERO_TITLE} description={HERO_DESCRIPTION} />

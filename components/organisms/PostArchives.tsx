@@ -2,7 +2,7 @@ import React from 'react'
 
 import { PostArticle } from '@/components/organisms/PostArticle'
 
-import type { Post } from '@/types'
+import type { Post } from '@/types/types'
 
 interface PostArchivesProps {
     title?: string

@@ -4,7 +4,7 @@ import { BackButton } from '@/components/molecules/BackButton'
 import { CategoryList } from '@/components/molecules/CategoryList'
 import { TagList } from '@/components/molecules/TagList'
 
-import type { Category, Tag } from '@/types'
+import type { Category, Tag } from '@/types/types'
 
 interface BlogHeaderProps {
     title: string

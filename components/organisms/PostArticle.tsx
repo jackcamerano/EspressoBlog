@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { formatDate, getImageUrl } from '@/lib/utils'
-import { Post } from '@/types'
+import { Post } from '@/types/types'
 
 import BlogDescription from '../atoms/Blog/BlogDescription'
 import BlogTitle from '../atoms/Blog/BlogTitle'
@@ -25,10 +25,7 @@ export const PostArticle = ({ post }: PostArticleProps) => {
         slug
     } = post
 
-    const date = React.useMemo(
-        () => formatDate(post.publishedAt),
-        [post.publishedAt]
-    )
+    const date = React.useMemo(() => formatDate(post.date), [post.date])
 
     return (
         <article className="overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow">

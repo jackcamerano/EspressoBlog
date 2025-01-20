@@ -3,12 +3,12 @@ import { notFound } from 'next/navigation'
 import { FeaturedImage } from '@/components/atoms/FeaturedImage'
 import { PostArchives } from '@/components/organisms/PostArchives'
 import { PostHeader } from '@/components/organisms/PostHeader'
-import { getAllPosts, getPost, getRelatedPosts } from '@/data'
+import { client } from '@/lib/clients'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
 import { getImageUrl } from '@/lib/utils'
 
 export const generateStaticParams = async () =>
-    (await getAllPosts()).map(post => ({ slug: post.slug }))
+    (await client.getAllPosts()).map(post => ({ slug: post.slug }))
 
 export const generateMetadata = async ({
     params
@@ -17,7 +17,7 @@ export const generateMetadata = async ({
 }) => {
     const { slug } = await params
 
-    const post = await getPost(slug)
+    const post = await client.getPost(slug)
 
     if (!post) {
         notFound()
@@ -29,7 +29,7 @@ export const generateMetadata = async ({
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params
 
-    const post = await getPost(slug)
+    const post = await client.getPost(slug)
 
     if (!post) {
         notFound()
@@ -40,7 +40,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const renderedContent = renderAndSanitizeMarkdown(content)
 
     const relatedPosts = tags?.length
-        ? await getRelatedPosts(tags[0].slug, slug)
+        ? await client.getRelatedPosts(tags, slug)
         : []
 
     return (
