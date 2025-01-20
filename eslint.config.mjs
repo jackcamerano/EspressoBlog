@@ -24,7 +24,8 @@ const rules = [
             '**/node_modules',
             '**/next-env.d.ts',
             '**/next.config.ts',
-            '**/yarn.lock'
+            '**/yarn.lock',
+            '**/pnpm-lock.yaml'
         ]
     },
     ...compat.extends('next/core-web-vitals', 'next/typescript'),

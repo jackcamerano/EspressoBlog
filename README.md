@@ -1,6 +1,6 @@
 # Getting Started
 
-Jackcamerano.com is a next template based on [Blogify](https://github.com/frontendweb3/blogify)
+EspressoBlog is a next template based on [Blogify](https://github.com/frontendweb3/blogify)
 
 ## Start with blogify
 
