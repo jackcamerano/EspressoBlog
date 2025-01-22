@@ -27,6 +27,8 @@ export const PostArticle = ({ post }: PostArticleProps) => {
 
     const date = React.useMemo(() => formatDate(post.date), [post.date])
 
+    const link = `/posts/${slug}`
+
     return (
         <article className="overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow">
             <div className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2">
@@ -40,7 +42,7 @@ export const PostArticle = ({ post }: PostArticleProps) => {
 
                     <BlogTitle className="text-xl font-bold">
                         <Link
-                            href={`/read/${slug}`}
+                            href={link}
                             aria-label={`View full article: ${title}`}
                         >
                             {title}
@@ -49,7 +51,7 @@ export const PostArticle = ({ post }: PostArticleProps) => {
 
                     <BlogDescription>{description}</BlogDescription>
 
-                    <ReadMoreLink href={`/read/${slug}`} />
+                    <ReadMoreLink href={link} />
 
                     <TagList title="We talk about:" tags={tags} />
                 </div>
@@ -57,7 +59,7 @@ export const PostArticle = ({ post }: PostArticleProps) => {
                 <div className="relative order-1 aspect-[6/5] overflow-hidden rounded-lg md:aspect-[6/3] lg:order-2">
                     {image && (
                         <Link
-                            href={`/read/${slug}`}
+                            href={link}
                             aria-label={`View full article: ${title}`}
                         >
                             <Image
