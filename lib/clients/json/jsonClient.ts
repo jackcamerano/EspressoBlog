@@ -1,3 +1,4 @@
+import { menuItems } from '@/data/menu'
 import { pages } from '@/data/pages'
 import { posts } from '@/data/posts'
 import { Category, Tag } from '@/types/types'
@@ -58,6 +59,9 @@ export const createJSONClient = (): CMSClient => {
         },
         getAllPages: async () => pages,
         getPage: async (slug: string) =>
-            pages.find(page => page.slug === slug) ?? null
+            pages.find(page => page.slug === slug) ?? null,
+        getMenu: async () => {
+            return menuItems ?? []
+        }
     }
 }

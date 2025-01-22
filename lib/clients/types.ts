@@ -1,4 +1,4 @@
-import type { Category, Page, Post, Tag } from '@/types/types'
+import type { Category, MenuLink, Page, Post, Tag } from '@/types/types'
 
 export interface CMSClient {
     getAllPosts(): Promise<Post[]>
@@ -11,4 +11,5 @@ export interface CMSClient {
     getRelatedPosts(tags: Tag[], excludedSlug: string): Promise<Post[]>
     getAllPages(): Promise<Page[]>
     getPage(slug: string): Promise<Page | null>
+    getMenu(): Promise<MenuLink[]>
 }

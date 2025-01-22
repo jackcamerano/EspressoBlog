@@ -34,3 +34,9 @@ export interface Post extends Content {
 }
 
 export type Page = Content
+
+export type MenuLink = {
+    label: string
+    href: string
+    icon?: string
+}

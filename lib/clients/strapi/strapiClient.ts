@@ -101,5 +101,14 @@ export const createStrapiClient = (): CMSClient => ({
 
         const data = await strapiFetch<StrapiPost[]>(url, [])
         return data ? data.map(post => transformPost(post)) : []
+    },
+
+    getMenu: async () => {
+        return [
+            { href: '/', label: 'Home' },
+            { href: '/tag/programming', label: 'Programming' },
+            { href: '/tag/photography', label: 'Photography' },
+            { href: '/pages/about', label: 'About' }
+        ]
     }
 })
