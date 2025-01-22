@@ -1,6 +1,6 @@
 import { createJSONClient } from '@/lib/clients/json/jsonClient'
 import { createStrapiClient } from '@/lib/clients/strapi/strapiClient'
-import { config, DATA_STORE_PROVIDERS } from '@/next.config'
+import { DATA_STORE_PROVIDERS } from '@/next.config' // TODO: fix config, share among server and client
 
 import type { CMSClient } from '@/lib/clients/types'
 
@@ -21,4 +21,6 @@ const createCMSClient = (cms: DataStoreProvider): CMSClient => {
     return clientCreator()
 }
 
-export const client = createCMSClient(config.DATA_STORE)
+export const client = createCMSClient(
+    (process.env.DATA_STORE || 'json') as 'strapi' | 'json' // TODO: fix config, share among server and client
+)

@@ -1,7 +1,5 @@
-import { config } from '@/next.config'
-
-export const token = config.STRAPI_API_TOKEN
-export const baseUrl = config.NEXT_PUBLIC_STRAPI_API_URL
+export const token = process.env.STRAPI_API_TOKEN
+export const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL
 
 export const strapiFetch = async <T>(
     url: string,
