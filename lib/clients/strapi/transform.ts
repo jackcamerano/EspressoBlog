@@ -4,9 +4,18 @@ import type {
     StrapiPost,
     StrapiPage,
     StrapiImage,
-    StrapiAuthor
+    StrapiAuthor,
+    StrapiMenuItem
 } from './strapiTypes'
-import type { Category, Page, Post, Tag, Author, Image } from '@/types/types'
+import type {
+    Category,
+    Page,
+    Post,
+    Tag,
+    Author,
+    Image,
+    MenuItem
+} from '@/types/types'
 
 export const transformImage = (strapiImage: StrapiImage): Image => ({
     name: strapiImage.name,
@@ -57,4 +66,11 @@ export const transformPost = (strapiPost: StrapiPost): Post => ({
     categories: strapiPost.categories.map((category: StrapiCategory) =>
         transformCategory(category)
     )
+})
+
+export const transformMenuItem = (
+    strapiMenuItem: StrapiMenuItem
+): MenuItem => ({
+    label: strapiMenuItem.title,
+    href: strapiMenuItem.link
 })

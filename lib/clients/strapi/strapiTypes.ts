@@ -40,3 +40,12 @@ export interface StrapiPost extends StrapiContent {
     tags: StrapiTag[]
     categories: StrapiCategory[]
 }
+
+export interface StrapiMenu {
+    menu_item: StrapiMenuItem[]
+}
+
+export interface StrapiMenuItem {
+    title: string
+    link: string
+}

@@ -1,6 +1,6 @@
-import { MenuLink } from '@/types/types'
+import { MenuItem } from '@/types/types'
 
-export const menuItems: MenuLink[] = [
+export const menuItems: MenuItem[] = [
     { href: '/', label: 'Home' },
     { href: '/tag/why', label: 'Why' },
     { href: '/categories/news', label: 'News' },

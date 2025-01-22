@@ -1,6 +1,7 @@
 import { strapiFetch, baseUrl } from '@/lib/clients/strapi/config'
 import {
     transformCategory,
+    transformMenuItem,
     transformPage,
     transformPost,
     transformTag
@@ -11,7 +12,8 @@ import type {
     StrapiCategory,
     StrapiTag,
     StrapiPost,
-    StrapiPage
+    StrapiPage,
+    StrapiMenu
 } from './strapiTypes'
 import type { CMSClient } from '@/lib/clients/types'
 
@@ -104,11 +106,10 @@ export const createStrapiClient = (): CMSClient => ({
     },
 
     getMenu: async () => {
-        return [
-            { href: '/', label: 'Home' },
-            { href: '/tag/programming', label: 'Programming' },
-            { href: '/tag/photography', label: 'Photography' },
-            { href: '/pages/about', label: 'About' }
-        ]
+        const url = `${baseUrl}/api/menu?populate=*`
+
+        const data = await strapiFetch<StrapiMenu | null>(url, null)
+
+        return data ? data?.menu_item.map(item => transformMenuItem(item)) : []
     }
 })
