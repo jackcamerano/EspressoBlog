@@ -1,10 +1,4 @@
 import {
-    strapiFetch,
-    baseUrl,
-    fetchAndTransform,
-    fetchAndTransformSingle
-} from '@/lib/clients/strapi/config'
-import {
     transformCategory,
     transformMenuItem,
     transformPage,
@@ -12,6 +6,12 @@ import {
     transformSocialLinks,
     transformTag
 } from '@/lib/clients/strapi/transform'
+import {
+    strapiFetch,
+    baseUrl,
+    fetchAndTransform,
+    fetchAndTransformSingle
+} from '@/lib/clients/strapi/utils'
 import { Tag } from '@/types/types'
 
 import type { StrapiMenu, StrapiSocialLinks } from './strapiTypes'

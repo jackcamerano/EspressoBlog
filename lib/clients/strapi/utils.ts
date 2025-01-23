@@ -2,17 +2,24 @@ export const token = process.env.STRAPI_API_TOKEN
 export const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL
 
 export const strapiFetch = async <T>(url: string): Promise<T | null> => {
-    const res = await fetch(url, {
-        headers: { Authorization: `Bearer ${token}` }
-    })
+    try {
+        const res = await fetch(url, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
 
-    if (!res.ok) {
-        console.error(`Strapi fetch failed: ${res.status} ${res.statusText}`)
+        if (!res.ok) {
+            console.error(
+                `Strapi fetch failed: ${res.status} ${res.statusText}`
+            )
+            return null
+        }
+
+        const json = await res.json()
+        return json.data || null
+    } catch (error) {
+        console.error(`Strapi fetch failed: ${error}`)
         return null
     }
-
-    const json = await res.json()
-    return json.data || null
 }
 
 export const fetchAndTransform = async <T, U>(
