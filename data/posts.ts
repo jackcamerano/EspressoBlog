@@ -29,7 +29,7 @@ export const posts: Post[] = [
             }
         ],
         featuredImage: {
-            url: 'https://dummyimage.com/1280x853/000/fff',
+            url: 'https://picsum.photos/1280/853',
             alternativeText: 'Policy smile eight person feeling PM year late'
         },
         author: {
@@ -65,7 +65,7 @@ export const posts: Post[] = [
         ],
         featuredImage: {
             name: 'anyone',
-            url: 'https://dummyimage.com/1280x853/000/fff'
+            url: 'https://picsum.photos/1280/853'
         },
         author: {
             name: 'Jack'
@@ -100,7 +100,7 @@ export const posts: Post[] = [
         ],
         featuredImage: {
             name: 'thought',
-            url: 'https://dummyimage.com/1280x853/000/fff',
+            url: 'https://picsum.photos/1280/853',
             alternativeText: 'Find or lawyer enter read hour take.'
         },
         author: {
@@ -136,7 +136,7 @@ export const posts: Post[] = [
         ],
         featuredImage: {
             name: 'how',
-            url: 'https://dummyimage.com/1280x853/000/fff'
+            url: 'https://picsum.photos/1280/853'
         },
         author: {
             name: 'Jack'
@@ -167,7 +167,7 @@ export const posts: Post[] = [
         ],
         featuredImage: {
             name: 'because',
-            url: 'https://dummyimage.com/1280x853/000/fff'
+            url: 'https://picsum.photos/1280/853'
         },
         author: {
             name: 'Jack'
@@ -207,7 +207,7 @@ export const posts: Post[] = [
         ],
         featuredImage: {
             name: 'student',
-            url: 'https://dummyimage.com/1280x853/000/fff',
+            url: 'https://picsum.photos/1280/853',
             alternativeText: 'Six trade father.'
         },
         author: {
@@ -247,7 +247,7 @@ export const posts: Post[] = [
         ],
         featuredImage: {
             name: 'find',
-            url: 'https://dummyimage.com/1280x853/000/fff'
+            url: 'https://picsum.photos/1280/853'
         },
         author: {
             name: 'Jack'
@@ -286,7 +286,7 @@ export const posts: Post[] = [
         ],
         featuredImage: {
             name: 'billion',
-            url: 'https://dummyimage.com/1280x853/000/fff',
+            url: 'https://picsum.photos/1280/853',
             alternativeText: 'Case card computer.'
         },
         author: {
@@ -326,7 +326,7 @@ export const posts: Post[] = [
         ],
         featuredImage: {
             name: 'both',
-            url: 'https://dummyimage.com/1280x853/000/fff'
+            url: 'https://picsum.photos/1280/853'
         },
         author: {
             name: 'Jack'
@@ -365,7 +365,7 @@ export const posts: Post[] = [
         ],
         featuredImage: {
             name: 'range',
-            url: 'https://dummyimage.com/1280x853/000/fff'
+            url: 'https://picsum.photos/1280/853'
         },
         author: {
             name: 'Jack'

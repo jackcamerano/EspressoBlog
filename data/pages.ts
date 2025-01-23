@@ -7,7 +7,7 @@ export const pages: Page[] = [
 
         featuredImage: {
             name: 'image name',
-            url: 'https://dummyimage.com/1280x853/000/fff',
+            url: 'https://picsum.photos/1280/853',
             alternativeText:
                 'Alt text for the image. This is a description of the image.'
         },
@@ -23,7 +23,7 @@ export const pages: Page[] = [
         title: 'Contact',
         description: 'Contact page description',
         featuredImage: {
-            url: 'https://dummyimage.com/1280x853/000/fff',
+            url: 'https://picsum.photos/1280/853',
             alternativeText:
                 'Alt text for the image. This is a description of the image.'
         },
@@ -39,7 +39,7 @@ export const pages: Page[] = [
         title: 'Support',
         description: 'Another random page description',
         featuredImage: {
-            url: 'https://dummyimage.com/1280x853/000/fff'
+            url: 'https://picsum.photos/1280/853'
         },
         author: {
             name: 'Jack'
