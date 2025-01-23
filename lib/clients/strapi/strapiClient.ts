@@ -1,4 +1,9 @@
-import { strapiFetch, baseUrl } from '@/lib/clients/strapi/config'
+import {
+    strapiFetch,
+    baseUrl,
+    fetchAndTransform,
+    fetchAndTransformSingle
+} from '@/lib/clients/strapi/config'
 import {
     transformCategory,
     transformMenuItem,
@@ -9,91 +14,62 @@ import {
 } from '@/lib/clients/strapi/transform'
 import { Tag } from '@/types/types'
 
-import type {
-    StrapiCategory,
-    StrapiTag,
-    StrapiPost,
-    StrapiPage,
-    StrapiMenu,
-    StrapiSocialLinks
-} from './strapiTypes'
+import type { StrapiMenu, StrapiSocialLinks } from './strapiTypes'
 import type { CMSClient } from '@/lib/clients/types'
 
 export const createStrapiClient = (): CMSClient => ({
-    getAllPosts: async () => {
-        const url = `${baseUrl}/api/posts?populate=*&sort=publishedAt:desc`
+    getAllPosts: async () =>
+        fetchAndTransform(
+            `${baseUrl}/api/posts?populate=*&sort=publishedAt:desc`,
+            transformPost
+        ),
 
-        const data = await strapiFetch<StrapiPost[]>(url, [])
+    getPost: async (slug: string) =>
+        fetchAndTransformSingle(
+            `${baseUrl}/api/posts?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`,
+            transformPost
+        ),
 
-        return data ? data.map(post => transformPost(post)) : []
-    },
-    getPost: async (slug: string) => {
-        const url = `${baseUrl}/api/posts?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`
+    getAllPages: async () =>
+        fetchAndTransform(`${baseUrl}/api/pages?populate=*`, transformPage),
 
-        const data = await strapiFetch<StrapiPost[]>(url, [])
+    getPage: async (slug: string) =>
+        fetchAndTransformSingle(
+            `${baseUrl}/api/pages?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`,
+            transformPage
+        ),
 
-        return data && data.length > 0 ? transformPost(data[0]) : null
-    },
-    getAllPages: async () => {
-        const url = `${baseUrl}/api/pages?populate=*`
+    getCategory: async (slug: string) =>
+        fetchAndTransformSingle(
+            `${baseUrl}/api/categories?filters[slug][$eq]=${encodeURIComponent(slug)}`,
+            transformCategory
+        ),
 
-        const data = await strapiFetch<StrapiPage[]>(url, [])
+    getPostsByCategory: async (slug: string) =>
+        fetchAndTransform(
+            `${baseUrl}/api/posts?filters[categories][slug][$eq]=${encodeURIComponent(slug)}&populate=*`,
+            transformPost
+        ),
 
-        return data ? data.map(page => transformPage(page)) : []
-    },
-    getPage: async (slug: string) => {
-        const url = `${baseUrl}/api/pages?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`
+    getCategories: async () =>
+        fetchAndTransform(
+            `${baseUrl}/api/categories?populate=*`,
+            transformCategory
+        ),
 
-        const data = await strapiFetch<StrapiPage[]>(url, [])
+    getPostsByTag: async (slug: string) =>
+        fetchAndTransform(
+            `${baseUrl}/api/posts?filters[tags][slug][$eq]=${encodeURIComponent(slug)}&populate=*`,
+            transformPost
+        ),
 
-        return data && data.length > 0 ? transformPage(data[0]) : null
-    },
-
-    getCategory: async (slug: string) => {
-        const url = `${baseUrl}/api/categories?filters[slug][$eq]=${encodeURIComponent(slug)}`
-
-        const data = await strapiFetch<StrapiCategory[]>(url, [])
-
-        return data && data.length > 0 ? transformCategory(data[0]) : null
-    },
-
-    getPostsByCategory: async (slug: string) => {
-        const url = `${baseUrl}/api/posts?filters[categories][slug][$eq]=${encodeURIComponent(slug)}&populate=*`
-
-        const data = await strapiFetch<StrapiPost[]>(url, [])
-
-        return data ? data.map(post => transformPost(post)) : []
-    },
-
-    getCategories: async () => {
-        const url = `${baseUrl}/api/categories?populate=*`
-
-        const data = await strapiFetch<StrapiCategory[]>(url, [])
-
-        return data ? data.map(category => transformCategory(category)) : []
-    },
-
-    getPostsByTag: async (slug: string) => {
-        const url = `${baseUrl}/api/posts?filters[tags][slug][$eq]=${encodeURIComponent(slug)}&populate=*`
-
-        const data = await strapiFetch<StrapiPost[]>(url, [])
-
-        return data ? data.map(post => transformPost(post)) : []
-    },
-
-    getTags: async () => {
-        const url = `${baseUrl}/api/tags?populate=*`
-
-        const data = await strapiFetch<StrapiTag[]>(url, [])
-
-        return data ? data.map(tag => transformTag(tag)) : []
-    },
+    getTags: async () =>
+        fetchAndTransform(`${baseUrl}/api/tags?populate=*`, transformTag),
 
     getRelatedPosts: async (tags: Tag[], excludedSlug: string) => {
         if (tags.length === 0) return []
 
         const tagsSlugs = Array.from(new Set(tags.map(tag => tag.slug)))
-
         const tagsQuery = tagsSlugs
             .map(
                 (tag, index) =>
@@ -101,27 +77,22 @@ export const createStrapiClient = (): CMSClient => ({
             )
             .join('&')
 
-        const url = `${baseUrl}/api/posts?filters[slug][$ne]=${encodeURIComponent(excludedSlug)}&${tagsQuery}&populate=*`
+        const url = `${baseUrl}/api/posts?filters[slug][$ne]=${encodeURIComponent(
+            excludedSlug
+        )}&${tagsQuery}&populate=*`
 
-        const data = await strapiFetch<StrapiPost[]>(url, [])
-        return data ? data.map(post => transformPost(post)) : []
+        return fetchAndTransform(url, transformPost)
     },
 
     getMenu: async () => {
         const url = `${baseUrl}/api/menu?populate=*`
-
-        const data = await strapiFetch<StrapiMenu | null>(url, null)
-
-        return data ? data?.menu_item.map(item => transformMenuItem(item)) : []
+        const data = await strapiFetch<StrapiMenu>(url)
+        return data ? data?.menu_item.map(transformMenuItem) : []
     },
 
     getSocialLinks: async () => {
         const url = `${baseUrl}/api/social-link`
-
-        const data = await strapiFetch<StrapiSocialLinks | null>(url, null)
-
-        const socialLinks = transformSocialLinks(data)
-
-        return socialLinks
+        const data = await strapiFetch<StrapiSocialLinks | null>(url)
+        return transformSocialLinks(data)
     }
 })
