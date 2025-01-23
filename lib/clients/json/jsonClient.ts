@@ -44,26 +44,34 @@ export const createJSONClient = (): CMSClient => {
 
     return {
         getAllPosts: async () =>
-            posts
-                .slice()
+            [...posts]
+                .filter(Boolean)
                 .sort(
                     (a, b) =>
                         new Date(b.date).getTime() - new Date(a.date).getTime()
                 ),
 
         getPost: async (slug: string) =>
-            posts.find(post => post.slug === slug) ?? null,
-        getCategory: async (slug: string) => {
-            const categories = extractCategories()
-            return categories.find(category => category.slug === slug) ?? null
-        },
+            !slug ? null : (posts.find(post => post.slug === slug) ?? null),
+        getCategory: async (slug: string) =>
+            !slug
+                ? null
+                : (extractCategories().find(
+                      category => category.slug === slug
+                  ) ?? null),
         getPostsByCategory: async (slug: string) =>
-            posts.filter(post =>
-                post.categories.some(category => category.slug === slug)
-            ),
+            !slug
+                ? []
+                : posts.filter(post =>
+                      post.categories.some(category => category.slug === slug)
+                  ),
         getCategories: async () => extractCategories(),
         getPostsByTag: async (slug: string) =>
-            posts.filter(post => post.tags.some(tag => tag.slug === slug)),
+            !slug
+                ? []
+                : posts.filter(post =>
+                      post.tags.some(tag => tag.slug === slug)
+                  ),
         getTags: async () => extractTags(),
         getRelatedPosts: async (
             tags: Tag[],
@@ -84,7 +92,7 @@ export const createJSONClient = (): CMSClient => {
         },
         getAllPages: async () => pages,
         getPage: async (slug: string) =>
-            pages.find(page => page.slug === slug) ?? null,
+            !slug ? null : (pages.find(page => page.slug === slug) ?? null),
         getMenu: async () => {
             return menuItems ?? []
         },
