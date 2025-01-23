@@ -15,7 +15,11 @@ export interface CMSClient {
     getCategories(): Promise<Category[]>
     getPostsByTag(slug: string): Promise<Post[]>
     getTags(): Promise<Tag[]>
-    getRelatedPosts(tags: Tag[], excludedSlug: string): Promise<Post[]>
+    getRelatedPosts(
+        tags: Tag[],
+        excludedSlug: string,
+        maxRelatedPosts: number
+    ): Promise<Post[]>
     getAllPages(): Promise<Page[]>
     getPage(slug: string): Promise<Page | null>
     getMenu(): Promise<MenuItem[]>

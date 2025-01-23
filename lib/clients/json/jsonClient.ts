@@ -7,24 +7,35 @@ import { Category, Tag } from '@/types/types'
 import type { CMSClient } from '@/lib/clients/types'
 
 export const createJSONClient = (): CMSClient => {
+    const categoriesCache = new Map<string, Category>()
+
     const extractCategories = (): Category[] => {
+        if (categoriesCache.size > 0) {
+            return Array.from(categoriesCache.values())
+        }
         const categoriesMap = new Map<string, Category>()
         posts.forEach(post => {
             post?.categories.forEach(category => {
                 if (!categoriesMap.has(category.slug)) {
                     categoriesMap.set(category.slug, category)
+                    categoriesCache.set(category.slug, category)
                 }
             })
         })
         return Array.from(categoriesMap.values())
     }
 
+    const tagsCache = new Map<string, Tag>()
     const extractTags = (): Tag[] => {
+        if (tagsCache.size > 0) {
+            return Array.from(tagsCache.values())
+        }
         const tagsMap = new Map<string, Tag>()
         posts.forEach(post => {
             post.tags.forEach(tag => {
                 if (!tagsMap.has(tag.slug)) {
                     tagsMap.set(tag.slug, tag)
+                    tagsCache.set(tag.slug, tag)
                 }
             })
         })
@@ -32,7 +43,14 @@ export const createJSONClient = (): CMSClient => {
     }
 
     return {
-        getAllPosts: async () => posts,
+        getAllPosts: async () =>
+            posts
+                .slice()
+                .sort(
+                    (a, b) =>
+                        new Date(b.date).getTime() - new Date(a.date).getTime()
+                ),
+
         getPost: async (slug: string) =>
             posts.find(post => post.slug === slug) ?? null,
         getCategory: async (slug: string) => {
@@ -47,16 +65,22 @@ export const createJSONClient = (): CMSClient => {
         getPostsByTag: async (slug: string) =>
             posts.filter(post => post.tags.some(tag => tag.slug === slug)),
         getTags: async () => extractTags(),
-        getRelatedPosts: async (tags: Tag[], excludeSlug: string) => {
+        getRelatedPosts: async (
+            tags: Tag[],
+            excludeSlug: string,
+            maxRelatedPosts: number
+        ) => {
             if (tags.length === 0) return []
 
             const tagsSlugs = new Set(tags.map(tag => tag.slug))
 
-            return posts.filter(
-                post =>
-                    post.slug !== excludeSlug &&
-                    post.tags.some(tag => tagsSlugs.has(tag.slug))
-            )
+            return posts
+                .filter(
+                    post =>
+                        post.slug !== excludeSlug &&
+                        post.tags.some(tag => tagsSlugs.has(tag.slug))
+                )
+                .slice(0, maxRelatedPosts)
         },
         getAllPages: async () => pages,
         getPage: async (slug: string) =>

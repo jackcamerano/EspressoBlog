@@ -39,8 +39,10 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
     const renderedContent = renderAndSanitizeMarkdown(content)
 
+    const MAX_RELATED_POSTS = 3
+
     const relatedPosts = tags?.length
-        ? await client.getRelatedPosts(tags, slug)
+        ? await client.getRelatedPosts(tags, slug, MAX_RELATED_POSTS)
         : []
 
     return (

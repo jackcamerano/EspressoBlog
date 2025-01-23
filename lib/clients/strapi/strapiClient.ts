@@ -66,7 +66,11 @@ export const createStrapiClient = (): CMSClient => ({
     getTags: async () =>
         fetchAndTransform(`${baseUrl}/api/tags?populate=*`, transformTag),
 
-    getRelatedPosts: async (tags: Tag[], excludedSlug: string) => {
+    getRelatedPosts: async (
+        tags: Tag[],
+        excludedSlug: string,
+        maxRelatedPosts: number
+    ) => {
         if (tags.length === 0) return []
 
         const tagsSlugs = Array.from(new Set(tags.map(tag => tag.slug)))
@@ -79,7 +83,7 @@ export const createStrapiClient = (): CMSClient => ({
 
         const url = `${baseUrl}/api/posts?filters[slug][$ne]=${encodeURIComponent(
             excludedSlug
-        )}&${tagsQuery}&populate=*`
+        )}&${tagsQuery}&populate=*&pagination[limit]=${maxRelatedPosts}&sort=publishedAt:desc`
 
         return fetchAndTransform(url, transformPost)
     },
