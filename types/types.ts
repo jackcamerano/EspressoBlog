@@ -35,8 +35,23 @@ export interface Post extends Content {
 
 export type Page = Content
 
-export type MenuItem = {
+export interface MenuItem {
     label: string
     href: string
     icon?: string
+}
+
+export const socialList = [
+    'facebook',
+    'instagram',
+    'twitter',
+    'linkedin',
+    'github'
+] as const
+
+export type Socials = (typeof socialList)[number]
+
+export interface SocialLink {
+    name: Socials
+    url: string
 }

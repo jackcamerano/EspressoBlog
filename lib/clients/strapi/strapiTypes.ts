@@ -49,3 +49,11 @@ export interface StrapiMenuItem {
     title: string
     link: string
 }
+
+export interface StrapiSocialLinks {
+    facebook: string
+    instagram: string
+    twitter: string
+    linkedin: string
+    github: string
+}

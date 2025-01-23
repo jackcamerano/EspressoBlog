@@ -4,6 +4,7 @@ import {
     transformMenuItem,
     transformPage,
     transformPost,
+    transformSocialLinks,
     transformTag
 } from '@/lib/clients/strapi/transform'
 import { Tag } from '@/types/types'
@@ -13,7 +14,8 @@ import type {
     StrapiTag,
     StrapiPost,
     StrapiPage,
-    StrapiMenu
+    StrapiMenu,
+    StrapiSocialLinks
 } from './strapiTypes'
 import type { CMSClient } from '@/lib/clients/types'
 
@@ -111,5 +113,15 @@ export const createStrapiClient = (): CMSClient => ({
         const data = await strapiFetch<StrapiMenu | null>(url, null)
 
         return data ? data?.menu_item.map(item => transformMenuItem(item)) : []
+    },
+
+    getSocialLinks: async () => {
+        const url = `${baseUrl}/api/social-link`
+
+        const data = await strapiFetch<StrapiSocialLinks | null>(url, null)
+
+        const socialLinks = transformSocialLinks(data)
+
+        return socialLinks
     }
 })

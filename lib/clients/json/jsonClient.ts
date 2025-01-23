@@ -1,6 +1,7 @@
 import { menuItems } from '@/data/menu'
 import { pages } from '@/data/pages'
 import { posts } from '@/data/posts'
+import { socialLinks } from '@/data/socialLinks'
 import { Category, Tag } from '@/types/types'
 
 import type { CMSClient } from '@/lib/clients/types'
@@ -62,6 +63,9 @@ export const createJSONClient = (): CMSClient => {
             pages.find(page => page.slug === slug) ?? null,
         getMenu: async () => {
             return menuItems ?? []
+        },
+        getSocialLinks: async () => {
+            return socialLinks
         }
     }
 }

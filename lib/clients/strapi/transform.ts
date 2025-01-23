@@ -1,3 +1,15 @@
+import {
+    type Category,
+    type Page,
+    type Post,
+    type Tag,
+    type Author,
+    type Image,
+    type MenuItem,
+    type SocialLink,
+    socialList
+} from '@/types/types'
+
 import type {
     StrapiCategory,
     StrapiTag,
@@ -5,17 +17,9 @@ import type {
     StrapiPage,
     StrapiImage,
     StrapiAuthor,
-    StrapiMenuItem
+    StrapiMenuItem,
+    StrapiSocialLinks
 } from './strapiTypes'
-import type {
-    Category,
-    Page,
-    Post,
-    Tag,
-    Author,
-    Image,
-    MenuItem
-} from '@/types/types'
 
 export const transformImage = (strapiImage: StrapiImage): Image => ({
     name: strapiImage.name,
@@ -74,3 +78,18 @@ export const transformMenuItem = (
     label: strapiMenuItem.title,
     href: strapiMenuItem.link
 })
+
+export const transformSocialLinks = (
+    strapiSocialLinks: StrapiSocialLinks | null
+): SocialLink[] => {
+    if (!strapiSocialLinks) return []
+
+    return socialList
+        .filter(
+            key => key in strapiSocialLinks && strapiSocialLinks[key]?.trim?.()
+        )
+        .map(social => ({
+            name: social,
+            url: strapiSocialLinks[social]
+        }))
+}
