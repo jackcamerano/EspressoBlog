@@ -2,7 +2,7 @@ import React from 'react'
 
 import { BlogHeader } from '@/components/organisms/BlogHeader'
 import { formatDate } from '@/lib/utils'
-import { Post } from '@/types'
+import { Post } from '@/types/types'
 
 type PostHeaderProps = {
     item: Post
@@ -10,12 +10,9 @@ type PostHeaderProps = {
 
 export const PostHeader = ({ item }: PostHeaderProps) => {
     const { title, description, categories, tags } = item
-    const author = item.createdBy.firstname ?? ''
+    const author = item.author?.name ?? ''
 
-    const date = React.useMemo(
-        () => formatDate(item.publishedAt),
-        [item.publishedAt]
-    )
+    const date = React.useMemo(() => formatDate(item.date), [item.date])
 
     return (
         <BlogHeader

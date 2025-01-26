@@ -1,4 +1,4 @@
-import { Page } from '@/types'
+import { Page } from '@/types/types'
 
 import { BlogHeader } from './BlogHeader'
 

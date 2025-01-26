@@ -1,9 +1,19 @@
 import { notFound } from 'next/navigation'
 
 import { PostArchives } from '@/components/organisms/PostArchives'
-import { getCategories, getPostsByCategory } from '@/data'
+import { client } from '@/lib/clients'
 
 import type { Metadata } from 'next'
+
+export const generateStaticParams = async () => {
+    try {
+        const categories = await client.getCategories()
+        return categories.map(category => ({ slug: category.slug }))
+    } catch (error) {
+        console.error('Failed to generate static params:', error)
+        return []
+    }
+}
 
 export const generateMetadata = async ({
     params
@@ -17,14 +27,10 @@ export const generateMetadata = async ({
     }
 }
 
-export const generateStaticParams = async () => {
-    return await getCategories()
-}
-
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params
 
-    const posts = await getPostsByCategory(slug)
+    const posts = await client.getPostsByCategory(slug)
 
     if (posts.length === 0) {
         notFound()

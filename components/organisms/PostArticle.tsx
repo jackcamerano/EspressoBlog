@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { formatDate, getImageUrl } from '@/lib/utils'
-import { Post } from '@/types'
+import { Post } from '@/types/types'
 
 import BlogDescription from '../atoms/Blog/BlogDescription'
 import BlogTitle from '../atoms/Blog/BlogTitle'
@@ -25,10 +25,9 @@ export const PostArticle = ({ post }: PostArticleProps) => {
         slug
     } = post
 
-    const date = React.useMemo(
-        () => formatDate(post.publishedAt),
-        [post.publishedAt]
-    )
+    const date = React.useMemo(() => formatDate(post.date), [post.date])
+
+    const link = `/posts/${slug}`
 
     return (
         <article className="overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow">
@@ -43,7 +42,7 @@ export const PostArticle = ({ post }: PostArticleProps) => {
 
                     <BlogTitle className="text-xl font-bold">
                         <Link
-                            href={`/read/${slug}`}
+                            href={link}
                             aria-label={`View full article: ${title}`}
                         >
                             {title}
@@ -52,7 +51,7 @@ export const PostArticle = ({ post }: PostArticleProps) => {
 
                     <BlogDescription>{description}</BlogDescription>
 
-                    <ReadMoreLink href={`/read/${slug}`} />
+                    <ReadMoreLink href={link} />
 
                     <TagList title="We talk about:" tags={tags} />
                 </div>
@@ -60,7 +59,7 @@ export const PostArticle = ({ post }: PostArticleProps) => {
                 <div className="relative order-1 aspect-[6/5] overflow-hidden rounded-lg md:aspect-[6/3] lg:order-2">
                     {image && (
                         <Link
-                            href={`/read/${slug}`}
+                            href={link}
                             aria-label={`View full article: ${title}`}
                         >
                             <Image

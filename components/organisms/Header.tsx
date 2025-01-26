@@ -1,27 +1,18 @@
-'use client'
-
 import Link from 'next/link'
 import * as React from 'react'
 
 import { Button } from '@/components/atoms/Button'
-import {
-    Facebook,
-    Instagram,
-    Twitter,
-    Linkedin
-} from '@/components/atoms/Icons'
 import { Logo } from '@/components/atoms/Logo'
 import NavigationMenu from '@/components/molecules/Navigation/NavigationMenu'
 import { ThemeToggle } from '@/components/organisms/ThemeToggle'
+import { client } from '@/lib/clients'
+import { SocialLink } from '@/types/types'
 
-export const Header = () => {
-    const menuItems = [
-        { href: '/', label: 'Home' },
-        { href: '/tag/programming', label: 'Programming' },
-        { href: '/tag/photography', label: 'Photography' },
-        { href: '/tag/smart-phone', label: 'Smart Phone' },
-        { href: '/pages/about', label: 'About' }
-    ]
+import { SocialIcon } from '../molecules/SocialIcon'
+
+export const Header = async () => {
+    const menuItems = await client.getMenu()
+    const socialLinks = await client.getSocialLinks()
 
     return (
         <header className="container mx-auto grid grid-cols-1 grid-rows-1 flex-wrap items-center justify-around gap-4 py-3 md:justify-between xl:grid-cols-6">
@@ -40,29 +31,15 @@ export const Header = () => {
             />
 
             <div className="mx-auto flex flex-row flex-wrap gap-4 xl:col-span-2 xl:col-start-5 xl:gap-2">
-                <Button variant="link" asChild>
-                    <Link href={'#'} aria-label="Visit our Facebook page">
-                        <Facebook />
-                    </Link>
-                </Button>
-
-                <Button variant="link" asChild>
-                    <Link href={'#'} aria-label="Visit our Instagram profile">
-                        <Instagram />
-                    </Link>
-                </Button>
-
-                <Button variant="link" asChild>
-                    <Link href={'#'} aria-label="Visit our Twitter page">
-                        <Twitter />
-                    </Link>
-                </Button>
-
-                <Button variant="link" asChild>
-                    <Link href={'#'} aria-label="Visit our LinkedIn page">
-                        <Linkedin />
-                    </Link>
-                </Button>
+                {socialLinks.map((link: SocialLink) => {
+                    return (
+                        <SocialIcon
+                            key={link.name}
+                            socialName={link.name}
+                            socialLink={link}
+                        />
+                    )
+                })}
 
                 <Button className="rounded-2xl">Subscribe</Button>
                 <ThemeToggle />

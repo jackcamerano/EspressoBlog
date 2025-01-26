@@ -1,9 +1,19 @@
 import { notFound } from 'next/navigation'
 
 import { PostArchives } from '@/components/organisms/PostArchives'
-import { getPostsByTag, GetTags } from '@/data'
+import { client } from '@/lib/clients'
 
 import type { Metadata } from 'next'
+
+export const generateStaticParams = async () => {
+    try {
+        const tags = await client.getTags()
+        return tags.map(tag => ({ slug: tag.slug }))
+    } catch (error) {
+        console.error('Failed to generate static params:', error)
+        return []
+    }
+}
 
 export const generateMetadata = async ({
     params
@@ -15,14 +25,10 @@ export const generateMetadata = async ({
     return { title: `Articles Related to ${slug?.trim().replaceAll(' ', '-')}` }
 }
 
-export const generateStaticParams = async () => {
-    return GetTags()
-}
-
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params
 
-    const posts = await getPostsByTag(slug)
+    const posts = await client.getPostsByTag(slug)
 
     if (posts.length === 0) {
         notFound()
@@ -30,12 +36,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
     const title = slug.replaceAll('-', ' ')
 
-    return (
-        <PostArchives
-            title={`Articles Categorised as ${title}`}
-            posts={posts}
-        />
-    )
+    return <PostArchives title={`Articles Related to ${title}`} posts={posts} />
 }
 
 export default Page

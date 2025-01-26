@@ -3,12 +3,18 @@ import React from 'react'
 
 import { FeaturedImage } from '@/components/atoms/FeaturedImage'
 import { PageHeader } from '@/components/organisms/PageHeader'
-import { getAllPages, getPage } from '@/data'
+import { client } from '@/lib/clients'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
 import { getImageUrl } from '@/lib/utils'
 
 export const generateStaticParams = async () => {
-    return await getAllPages()
+    try {
+        const pages = await client.getAllPages()
+        return pages.map(page => ({ slug: page.slug }))
+    } catch (error) {
+        console.error('Failed to generate static params:', error)
+        return []
+    }
 }
 
 export const generateMetadata = async ({
@@ -20,10 +26,11 @@ export const generateMetadata = async ({
 
     return { title: slug }
 }
+
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params
 
-    const page = await getPage(slug)
+    const page = await client.getPage(slug)
 
     if (!page) {
         notFound()
