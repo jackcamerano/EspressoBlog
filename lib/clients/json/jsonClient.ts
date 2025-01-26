@@ -44,12 +44,16 @@ export const createJSONClient = (): CMSClient => {
 
     return {
         getAllPosts: async () =>
-            [...posts]
-                .filter(Boolean)
-                .sort(
-                    (a, b) =>
-                        new Date(b.date).getTime() - new Date(a.date).getTime()
-                ),
+            [...posts].filter(Boolean).sort((a, b) => {
+                const dateA = new Date(a.date).getTime()
+                const dateB = new Date(b.date).getTime()
+
+                if (isNaN(dateA) && isNaN(dateB)) return 0
+                if (isNaN(dateA)) return 1
+                if (isNaN(dateB)) return -1
+
+                return dateB - dateA
+            }),
 
         getPost: async (slug: string) =>
             !slug ? null : (posts.find(post => post.slug === slug) ?? null),
