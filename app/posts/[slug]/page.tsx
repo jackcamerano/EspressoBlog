@@ -7,8 +7,15 @@ import { client } from '@/lib/clients'
 import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
 import { getImageUrl } from '@/lib/utils'
 
-export const generateStaticParams = async () =>
-    (await client.getAllPosts()).map(post => ({ slug: post.slug }))
+export const generateStaticParams = async () => {
+    try {
+        const posts = await client.getAllPosts()
+        return posts.map(post => ({ slug: post.slug }))
+    } catch (error) {
+        console.error('Failed to generate static params:', error)
+        return []
+    }
+}
 
 export const generateMetadata = async ({
     params

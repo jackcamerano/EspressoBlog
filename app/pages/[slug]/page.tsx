@@ -8,7 +8,13 @@ import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
 import { getImageUrl } from '@/lib/utils'
 
 export const generateStaticParams = async () => {
-    return await client.getAllPages()
+    try {
+        const pages = await client.getAllPages()
+        return pages.map(page => ({ slug: page.slug }))
+    } catch (error) {
+        console.error('Failed to generate static params:', error)
+        return []
+    }
 }
 
 export const generateMetadata = async ({

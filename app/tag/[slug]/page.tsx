@@ -5,6 +5,16 @@ import { client } from '@/lib/clients'
 
 import type { Metadata } from 'next'
 
+export const generateStaticParams = async () => {
+    try {
+        const tags = await client.getTags()
+        return tags.map(tag => ({ slug: tag.slug }))
+    } catch (error) {
+        console.error('Failed to generate static params:', error)
+        return []
+    }
+}
+
 export const generateMetadata = async ({
     params
 }: {
@@ -13,10 +23,6 @@ export const generateMetadata = async ({
     const { slug } = await params
 
     return { title: `Articles Related to ${slug?.trim().replaceAll(' ', '-')}` }
-}
-
-export const generateStaticParams = async () => {
-    return client.getTags()
 }
 
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
