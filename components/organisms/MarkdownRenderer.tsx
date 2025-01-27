@@ -1,8 +1,29 @@
+import hljs from 'highlight.js'
 import markdownit from 'markdown-it'
 import React from 'react'
 import sanitizeHtml from 'sanitize-html'
+import 'highlight.js/styles/night-owl.css'
 
-const md = new markdownit()
+const md = markdownit({
+    highlight: function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                const highlighted = hljs.highlight(str, {
+                    language: lang
+                }).value
+                const lines = highlighted
+                    .split('\n')
+                    .map(
+                        (line, index) =>
+                            `<span class="hljs-line"><span class="line-number select-none mr-4">${index + 1}</span>${line || ' '}</span>`
+                    )
+                return `<pre class="hljs"><code>${lines.join('\n')}</code></pre>`
+            } catch (__) {}
+        }
+
+        return ''
+    }
+})
 
 interface MarkdownRendererProps {
     content: string
