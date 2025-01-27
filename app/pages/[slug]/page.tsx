@@ -2,9 +2,9 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 
 import { FeaturedImage } from '@/components/atoms/FeaturedImage'
+import { MarkdownRenderer } from '@/components/organisms/MarkdownRenderer'
 import { PageHeader } from '@/components/organisms/PageHeader'
 import { client } from '@/lib/clients'
-import { renderAndSanitizeMarkdown } from '@/lib/renderMarkdown'
 import { getImageUrl } from '@/lib/utils'
 
 export const generateStaticParams = async () => {
@@ -38,8 +38,6 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
     const { featuredImage, content, title } = page
 
-    const renderedContent = renderAndSanitizeMarkdown(content)
-
     return (
         <>
             <PageHeader item={page} />
@@ -52,11 +50,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             )}
 
             <article className="container prose mx-auto max-w-6xl px-6 dark:prose-invert lg:prose-xl">
-                {renderedContent && (
-                    <div
-                        dangerouslySetInnerHTML={{ __html: renderedContent }}
-                    />
-                )}
+                <MarkdownRenderer content={content} />
             </article>
         </>
     )
