@@ -24,6 +24,7 @@
         "dayjs": "^1.11.13",
         "env-schema": "^6.0.1",
         "framer-motion": "^11.15.0",
+        "highlight.js": "^11.11.1",
         "lucide-react": "^0.469.0",
         "markdown-it": "^14.1.0",
         "mini-svg-data-uri": "^1.4.4",
