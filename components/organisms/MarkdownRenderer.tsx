@@ -6,23 +6,30 @@ import 'highlight.js/styles/night-owl.css'
 
 const md = markdownit({
     highlight: function (str, lang) {
-        if (lang && hljs.getLanguage(lang)) {
-            try {
-                const highlighted = hljs.highlight(str, {
-                    language: lang
-                }).value
-                const lines = highlighted
-                    .split('\n')
-                    .map(
-                        (line, index) =>
-                            `<span class="hljs-line"><span class="line-number select-none mr-4">${index + 1}</span>${line || ' '}</span>`
-                    )
-                    .join('\n')
-                return `<span class="lang-label block bg-gray-800 text-gray-400 text-xs font-medium uppercase mb-2 w-fit">${lang}</span>${lines}`
-            } catch (__) {}
-        }
-        console.log(`couldn't build code block, unknown lang:'${lang}'`)
-        return str
+        const language = lang && hljs.getLanguage(lang) ? lang : null
+
+        const highlighted = language
+            ? (() => {
+                  try {
+                      return hljs.highlight(str, { language }).value
+                  } catch (error) {
+                      console.warn(
+                          `Failed to highlight ${lang} code block:`,
+                          error
+                      )
+                      return str
+                  }
+              })()
+            : str
+
+        const lines = highlighted
+            .split('\n')
+            .map(
+                (line, index) =>
+                    `<span class="hljs-line"><span class="line-number select-none mr-4">${index + 1}</span>${line || ' '}</span>`
+            )
+            .join('\n')
+        return `<span class="lang-label block bg-gray-800 text-gray-400 text-xs font-medium uppercase mb-2 w-fit">${language || 'text'}</span>${lines}`
     }
 })
 
