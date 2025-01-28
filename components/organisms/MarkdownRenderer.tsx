@@ -17,11 +17,12 @@ const md = markdownit({
                         (line, index) =>
                             `<span class="hljs-line"><span class="line-number select-none mr-4">${index + 1}</span>${line || ' '}</span>`
                     )
-                return `<pre class="hljs"><code>${lines.join('\n')}</code></pre>`
+                    .join('\n')
+                return `<span class="lang-label block bg-gray-800 text-gray-400 text-xs font-medium uppercase mb-2 w-fit">${lang}</span>${lines}`
             } catch (__) {}
         }
-
-        return ''
+        console.log(`couldn't build code block, unknown lang:'${lang}'`)
+        return str
     }
 })
 
