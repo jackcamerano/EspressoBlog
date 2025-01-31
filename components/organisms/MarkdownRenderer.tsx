@@ -3,6 +3,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 import { CopyButton } from '../atoms/CopyButton'
+import { LanguageLabel } from '../atoms/LanguageLabel'
 
 interface MarkdownRendererProps {
     content: string
@@ -16,18 +17,20 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
             components={{
                 code({ className, children, ...props }) {
                     const isInline = !className
-                    const match = /language-(\w+)/.exec(className || '')
-                    const codeString = String(children).trim()
+                    const language =
+                        className?.replace(/^language-/, '') || 'plaintext'
+                    const codeString = String(children).trim().concat('\n')
 
-                    return !isInline && match ? (
+                    return !isInline ? (
                         <div className="group relative">
-                            <CopyButton text={codeString} />{' '}
+                            <LanguageLabel language={language} />
+                            <CopyButton text={codeString} />
                             <SyntaxHighlighter
                                 style={nightOwl}
-                                language={match[1]}
+                                language={language}
                                 showLineNumbers
                             >
-                                {String(children).replace(/\n$/, '')}
+                                {codeString}
                             </SyntaxHighlighter>
                         </div>
                     ) : (
