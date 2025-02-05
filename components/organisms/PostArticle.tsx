@@ -2,7 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import { formatDate, getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/serverUtils'
+import { formatDate } from '@/lib/utils'
 import { Post } from '@/types/types'
 
 import BlogDescription from '../atoms/Blog/BlogDescription'

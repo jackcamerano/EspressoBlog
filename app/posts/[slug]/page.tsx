@@ -5,7 +5,7 @@ import { MarkdownRenderer } from '@/components/organisms/MarkdownRenderer'
 import { PostArchives } from '@/components/organisms/PostArchives'
 import { PostHeader } from '@/components/organisms/PostHeader'
 import { client } from '@/lib/clients'
-import { getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/serverUtils'
 
 export const generateStaticParams = async () => {
     try {

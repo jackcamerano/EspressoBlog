@@ -1,5 +1,6 @@
-export const token = process.env.STRAPI_API_TOKEN
-export const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL
+import { config } from '@/env'
+
+export const { STRAPI_API_TOKEN: token, STRAPI_API_URL: baseUrl } = config
 
 export const strapiFetch = async <T>(url: string): Promise<T | null> => {
     try {
