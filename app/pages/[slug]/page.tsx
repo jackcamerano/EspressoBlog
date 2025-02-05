@@ -5,7 +5,7 @@ import { FeaturedImage } from '@/components/atoms/FeaturedImage'
 import { MarkdownRenderer } from '@/components/organisms/MarkdownRenderer'
 import { PageHeader } from '@/components/organisms/PageHeader'
 import { client } from '@/lib/clients'
-import { getImageUrl } from '@/lib/utils'
+import { getImageUrl } from '@/lib/serverUtils'
 
 export const generateStaticParams = async () => {
     try {
